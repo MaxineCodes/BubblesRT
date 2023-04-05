@@ -13,10 +13,6 @@ const double radial = cos(pi / 4);
 //// Math functions
 
 inline float degreesToRadians(float degrees);
-
-// Returns a random float between 0.0 - 0.1.
-static float randomFloat();
-// Returns a random float between min - max
-static float randomFloat(float min, float max);
-
+float randomFloat();
+float randomFloat(float min, float max);
 inline float clamp(float value, float min, float max);

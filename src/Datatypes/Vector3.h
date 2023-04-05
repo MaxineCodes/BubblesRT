@@ -41,7 +41,15 @@ public:
 	inline static Vector3 random();
 	inline static Vector3 random(float min, float max);
 	bool near_zero() const;
+
+	// Presets
+	static Vector3 None() { return Vector3(0.0, 0.0, 0.0); }
 };
+
+// Type aliases
+using Vector3f = Vector3;
+using Point3f = Vector3;
+using Point3 = Vector3;
 
 // Additional includes you will likely need if you're using Vector3
 #include "../Maths/VectorMaths.h"

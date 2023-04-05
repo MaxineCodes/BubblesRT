@@ -1,19 +1,37 @@
 #include "OpenglWindow.h"
 
 // Constructor
-OpenglWindow::OpenglWindow(std::string windowName, int windowWidth, int windowHeight)
+OpenglWindow::OpenglWindow(const char* windowName, int windowWidth, int windowHeight)
 {
+    // Create window
     SetWindowName(windowName);
     SetWindowSize(windowWidth, windowHeight);
-
-    // Create window
     if (!CreateWindow()) 
-    {
         std::cout << "ERROR: OpenglWindow.CreateWindow failed." << std::endl;
-    }
 }
 
-void OpenglWindow::SetWindowName(std::string windowName) {
+OpenglWindow::OpenglWindow(const char* windowName, const Image& image)
+{
+    // Create window
+    SetWindowName(windowName);
+    SetWindowSize(image.m_width, image.m_height);
+    if (!CreateWindow())
+        std::cout << "ERROR: OpenglWindow.CreateWindow failed." << std::endl;
+
+    // Immediately draw an image
+    DrawImage(image);
+}
+
+OpenglWindow::OpenglWindow(const char* windowName, const RTSettings& raytraceSettings)
+{
+    // Create window
+    SetWindowName(windowName);
+    SetWindowSize(raytraceSettings.ImageWidth, raytraceSettings.ImageHeight);
+    if (!CreateWindow())
+        std::cout << "ERROR: OpenglWindow.CreateWindow failed." << std::endl;
+}
+
+void OpenglWindow::SetWindowName(const char* windowName) {
     m_windowName = windowName;
 }
 
@@ -31,7 +49,7 @@ bool OpenglWindow::CreateWindow()
         return false;
 
     // Create a windowed mode window and its OpenGL context
-    window = glfwCreateWindow(m_windowWidth, m_windowHeight, m_windowName.c_str(), NULL, NULL);
+    window = glfwCreateWindow(m_windowWidth, m_windowHeight, m_windowName, NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -63,4 +81,12 @@ bool OpenglWindow::CreateWindow()
 
     glfwTerminate();
     return false;
+}
+
+void OpenglWindow::DrawImage(const Image& image)
+{
+}
+
+void OpenglWindow::ClearWindow(const Colour& fillColour)
+{
 }

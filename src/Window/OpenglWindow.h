@@ -5,25 +5,34 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "../Datatypes/Image.h"
+#include "../Datatypes/Colour.h"
+#include "../RTCore/RTSettings.h"
+
 class OpenglWindow
 {
 private:
-	std::string m_windowName = "WINDOW";
-	int m_windowWidth = 640;
-	int m_windowHeight = 480;
+	const char* m_windowName = "BubblesRT";
+	int m_windowWidth = 20;
+	int m_windowHeight = 20;
+
+public:
+	// Constructors
+	OpenglWindow(const char* windowName, int windowWidth, int windowHeight);
+	OpenglWindow(const char* windowName, const Image& image);
+	OpenglWindow(const char* windowName, const RTSettings& raytraceSettings);
 
 private:
-	void SetWindowName(std::string windowName);
+	void SetWindowName(const char* windowName);
 	void SetWindowSize(int width, int height);
 	bool CreateWindow();
 
 public:
-	// Constructor
-	OpenglWindow(std::string windowName, int windowWidth, int windowHeight);
+	// Draw an Image to the screen
+	void DrawImage(const Image& image);
 
-public:
-	// Draw an image to the screen
-	void DrawImage();
-	void ClearWindow();
+	// Clear the window and fill with a Colour. 
+	// If no Colour is given as a parameter, fill it with Magenta.
+	void ClearWindow(const Colour& fillColour=Colour::Magenta());
 };
 
