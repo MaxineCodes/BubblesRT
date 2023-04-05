@@ -135,6 +135,8 @@
   <ItemGroup>
     <ClCompile Include="src\Datatypes\Image.cpp" />
     <ClCompile Include="src\Datatypes\Colour.cpp" />
+    <ClCompile Include="src\Maths\Maths.cpp" />
+    <ClCompile Include="src\Maths\VectorMaths.cpp" />
     <ClCompile Include="src\Window\OpenglWindow.cpp" />
     <ClCompile Include="src\BubblesMain\Main.cpp" />
     <ClCompile Include="src\Datatypes\Vector3.cpp" />
@@ -143,6 +145,8 @@
     <ClInclude Include="src\Export\ExportPPM.h" />
     <ClInclude Include="src\Datatypes\Image.h" />
     <ClInclude Include="src\Datatypes\Colour.h" />
+    <ClInclude Include="src\Maths\Maths.h" />
+    <ClInclude Include="src\Maths\VectorMaths.h" />
     <ClInclude Include="src\Window\OpenglWindow.h" />
     <ClInclude Include="src\Datatypes\Vector3.h" />
   </ItemGroup>
