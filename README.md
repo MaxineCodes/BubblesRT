@@ -2,10 +2,15 @@
 
 # Bubbles Raytracing Renderer
  
-The Bubbles raytracing rendering engine is a GUI offline raytracing engine project which only renders stuff using C++. <br/>
-The goal is to stay away from dependencies and code most of the funcionality from scratch.
+### The Bubbles raytracing rendering engine is a offline/CPU raytracing engine project.
+The goal of this project is to stay away from external libraries, and really understand how raytracing works under the hood.  
+This raytracer is not particularely efficient or feature-rich. It is a learning exersize after all. :)
 
-Currently using the following:
+---
+
+Dependencies:
 - OpenGL
-- GLAD
+- GLEW
 - GLFW
+
+---
