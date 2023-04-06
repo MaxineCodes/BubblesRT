@@ -26,6 +26,9 @@ public:
 	float g() const { return e[1]; }
 	float b() const { return e[2]; }
 
+	// Convert [0f-1f] to [0-255]
+	Colour convertTo255(const Colour& colour);
+
 	// Presets
 	static Colour White()	{ return Colour(1.0f, 1.0f, 1.0f); }
 	static Colour Black()	{ return Colour(0.0f, 0.0f, 0.0f); }

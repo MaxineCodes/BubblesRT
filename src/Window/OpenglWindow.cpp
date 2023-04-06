@@ -1,5 +1,10 @@
 #include "OpenglWindow.h"
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
+#include "../Datatypes/Vector2.h"
+
 // Constructor
 OpenglWindow::OpenglWindow(const char* windowName, int windowWidth, int windowHeight)
 {
@@ -9,7 +14,7 @@ OpenglWindow::OpenglWindow(const char* windowName, int windowWidth, int windowHe
     if (!CreateWindow()) 
         std::cout << "ERROR: OpenglWindow.CreateWindow failed." << std::endl;
 }
-
+// Constructor
 OpenglWindow::OpenglWindow(const char* windowName, const Image& image)
 {
     // Create window
@@ -21,7 +26,7 @@ OpenglWindow::OpenglWindow(const char* windowName, const Image& image)
     // Immediately draw an image
     DrawImage(image);
 }
-
+// Constructor
 OpenglWindow::OpenglWindow(const char* windowName, const RTSettings& raytraceSettings)
 {
     // Create window
@@ -31,11 +36,13 @@ OpenglWindow::OpenglWindow(const char* windowName, const RTSettings& raytraceSet
         std::cout << "ERROR: OpenglWindow.CreateWindow failed." << std::endl;
 }
 
-void OpenglWindow::SetWindowName(const char* windowName) {
+void OpenglWindow::SetWindowName(const char* windowName) 
+{
     m_windowName = windowName;
 }
 
-void OpenglWindow::SetWindowSize(int width, int height) {
+void OpenglWindow::SetWindowSize(int width, int height) 
+{
     m_windowHeight = height;
     m_windowWidth = width;
 }
@@ -66,11 +73,25 @@ bool OpenglWindow::CreateWindow()
     if (glewInit() == GLEW_OK)
         std::cout << "GLEW_OK" << std::endl;
 
+
+    float positions[6] = {
+        -0.5f,  0.5f,
+         0.0f,  0.5f,
+         0.5f, -0.5f
+    };
+
+    unsigned int buffer;
+    glGenBuffers(1, &buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer);
+    glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
+
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window))
     {
         // Render here
         glClear(GL_COLOR_BUFFER_BIT);
+
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // Swap front and back buffers
         glfwSwapBuffers(window);
@@ -85,8 +106,10 @@ bool OpenglWindow::CreateWindow()
 
 void OpenglWindow::DrawImage(const Image& image)
 {
+
 }
 
 void OpenglWindow::ClearWindow(const Colour& fillColour)
 {
+
 }

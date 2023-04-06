@@ -2,9 +2,6 @@
 
 #include <iostream>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
 #include "../Datatypes/Image.h"
 #include "../Datatypes/Colour.h"
 #include "../RTCore/RTSettings.h"
