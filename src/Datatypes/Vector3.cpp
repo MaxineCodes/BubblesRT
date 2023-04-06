@@ -93,9 +93,9 @@ inline Vector3 operator/(Vector3 v, double t)
 // Handy maths
 double Vector3::length() const
 {
-	return std::sqrt(length_squared());
+	return std::sqrt(lengthSquared());
 }
-double Vector3::length_squared() const
+double Vector3::lengthSquared() const
 {
 	return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
 }
@@ -107,7 +107,7 @@ inline Vector3 Vector3::random(float min, float max)
 {
 	return Vector3(randomFloat(min, max), randomFloat(min, max), randomFloat(min, max));
 }
-bool Vector3::near_zero() const
+bool Vector3::nearZero() const
 {
 	// Return true if the vector is close to zero in all dimensions.
 	const auto s = 1e-8;

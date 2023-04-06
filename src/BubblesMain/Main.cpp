@@ -3,16 +3,34 @@
 //	- B U B B L E S   R A Y T R A C I N G   R E N D E R E R -
 //	 ~                Offline RT renderer;                 ~
 //
-//	The Bubbles raytracing rendering engine is a offline raytracing engine project.
-//  
-//  
+//	The Bubbles raytracing rendering engine is a offline/CPU raytracing engine project.
+// 
+//>------------------------------------------------------------------------------------------
+// 
+//  Description:  The goal of this project is to stay away from external libraries,
+//                and really understand how raytracing works under the hood. 
+// 
+//                This raytracer is not particularely efficient or feature-rich.
+//                It is a learning exersize after all. :) 
+// 
+// 
+//  Usage:        Currently everything is simply thrown into the main() function.
+// 
+// 
+//  Dependencies: *OpenGL
+//                *GLEW
+//                *GLFW
 //	
+//  Further Info: The Github Wiki Pages will have more explanation on how this mess works.
+//                The Github Readme contains some simple progress updates.
+// 
+//>------------------------------------------------------------------------------------------
 //  
-//	Description:
+//  Starting date: 04/04/2023 
 //  
-//  
-//	Credits:
-//  - Maxine Meijboom
+//	Credits: Maxine Meijboom
+//           [github.com/MaxineCodes]
+//           [linkedin.com/in/maxinemeijboom]
 //  
 /////////////////////////////////////////////////////////////////////////////////////////////
 

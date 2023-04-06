@@ -1,4 +1,15 @@
+/////////////////////////////////////////////////////////////////////////////////////////////
+// 
+//	Vector3.h
+//
+//	Description:
+//	 Vector3 class based on floats. Complete with Vector3 and float operators.
+//	 Based on the Vector3 implementation found in RTWeekend
+// 
+//  
+/////////////////////////////////////////////////////////////////////////////////////////////
 #pragma once
+
 
 class Vector3
 {
@@ -25,26 +36,30 @@ public:
 	float operator[](int i) const;
 	float& operator[](int i);
 
-	// Add with another vector
+	// operator methods
 	Vector3& operator+=(const Vector3 &vector);
-	// Substract with another vector
 	Vector3& operator-=(const Vector3 &vector);
-
-	// Multiply vector by value
 	Vector3& operator*=(const double value);
-	// Divide vector by value
 	Vector3& operator/=(const double value);
 
 	// Handy maths
 	double length() const;
-	double length_squared() const;
+	double lengthSquared() const;
 	inline static Vector3 random();
 	inline static Vector3 random(float min, float max);
-	bool near_zero() const;
+	bool nearZero() const;
 
 	// Presets
 	static Vector3 None() { return Vector3(0.0, 0.0, 0.0); }
 };
+
+// extern inline Vector3 operator methods
+extern inline Vector3 operator+(const Vector3& u, const Vector3& v);
+extern inline Vector3 operator-(const Vector3& u, const Vector3& v);
+extern inline Vector3 operator*(const Vector3& u, const Vector3& v);
+extern inline Vector3 operator*(double t, const Vector3& v);
+extern inline Vector3 operator*(const Vector3& v, double t);
+extern inline Vector3 operator/(Vector3 v, double t);
 
 // Type aliases
 using Vector3f = Vector3;

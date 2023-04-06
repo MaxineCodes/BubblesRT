@@ -1,7 +1,16 @@
+/////////////////////////////////////////////////////////////////////////////////////////////
+// 
+//	Colour.h
+//
+//	Description:
+//	 Essentially a lightweight version of Vector3 with RGB instead of XYZ.
+//	 Complete with some useful colour presets!
+// 
+//  
+/////////////////////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-// Colour is basically just a modified Vector3 class
-// It's stripped down to be a little more lightweight
+
 class Colour
 {
 public:
@@ -32,3 +41,8 @@ public:
 	static Colour BubblePurple()	{ return Colour(0.81f, 0.31f, 0.92f); }
 
 };
+
+// Type aliases
+using Vector3colour = Colour;
+using colour = Colour;
+using color = Colour;

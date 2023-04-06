@@ -1,6 +1,19 @@
+/////////////////////////////////////////////////////////////////////////////////////////////
+// 
+//	Image.h
+//
+//	Description:
+//	 A datatype to store a whole lot of Colours.
+//	 Essentially a way to store full images in memory so we can draw it all in 1 draw call.
+//	 It requires the width and height to be determined before constructing the Image.
+// 
+//  
+/////////////////////////////////////////////////////////////////////////////////////////////
 #pragma once
+
 #include <vector>
 #include "Colour.h"
+
 
 class Image
 {
