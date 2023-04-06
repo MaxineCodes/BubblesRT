@@ -1,4 +1,4 @@
-![image](https://github.com/MaxineCodes/Bubbles/blob/master/Bubbles/img/banner.png)
+![image](https://github.com/MaxineCodes/BubblesRT/blob/main/img/Banner@2x.png)
 
 # Bubbles Raytracing Renderer
  
