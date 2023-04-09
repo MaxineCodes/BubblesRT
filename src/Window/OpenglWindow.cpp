@@ -2,12 +2,19 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <string>
+#include <fstream>
 
-#include "../Datatypes/Vector2.h"
+std::string OpenglWindow::ParseShaderFile(const std::string& filePath)
+{
+    //std::ifstream stream(filePath);
+    //std::ifstream t(filePath);
+    //std::stringstream stringStream << t.rdbuf();
+    std::string file_content;
+    std::getline(std::ifstream(filePath), file_content, '\0');
+    return file_content;
 
-#include "OpenglFragmentshader.h"
-#include "OpenglVertexshader.h"
-
+}
 
 // Compiles the shader and returns the shaders ID
 unsigned int OpenglWindow::CompileGlShader(unsigned int type, const std::string& source)
@@ -66,7 +73,7 @@ OpenglWindow::OpenglWindow(const char* windowName, int windowWidth, int windowHe
     SetWindowName(windowName);
     SetWindowSize(windowWidth, windowHeight);
     if (!CreateWindow()) 
-        std::cout << "ERROR: OpenglWindow.CreateWindow failed." << std::endl;
+        std::cout << "ERROR: OpenglWindow.CreateWindow something went wrong." << std::endl;
 }
 // Constructor
 OpenglWindow::OpenglWindow(const char* windowName, const Image& image)
@@ -75,7 +82,7 @@ OpenglWindow::OpenglWindow(const char* windowName, const Image& image)
     SetWindowName(windowName);
     SetWindowSize(image.m_width, image.m_height);
     if (!CreateWindow())
-        std::cout << "ERROR: OpenglWindow.CreateWindow failed." << std::endl;
+        std::cout << "ERROR: OpenglWindow.CreateWindow something went wrong." << std::endl;
 
     // Immediately draw an image
     DrawImage(image);
@@ -87,7 +94,7 @@ OpenglWindow::OpenglWindow(const char* windowName, const RTSettings& raytraceSet
     SetWindowName(windowName);
     SetWindowSize(raytraceSettings.ImageWidth, raytraceSettings.ImageHeight);
     if (!CreateWindow())
-        std::cout << "ERROR: OpenglWindow.CreateWindow failed." << std::endl;
+        std::cout << "ERROR: OpenglWindow.CreateWindow something went wrong." << std::endl;
 }
 
 void OpenglWindow::SetWindowName(const char* windowName) 
@@ -128,22 +135,29 @@ bool OpenglWindow::CreateWindow()
         std::cout << "GLEW_OK" << std::endl;
 
 
+    // Vertex positions
     float positions[6] = {
         -0.5f, -0.5f,
-         0.0f,  0.5f,
+        -0.5f,  0.5f,
          0.5f, -0.5f
     };
 
+    // Create vertex buffers
     unsigned int buffer;
     glGenBuffers(1, &buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
 
+    // Tell opgnl the vertex size
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float)*2, 0);
 
-    unsigned int shaderProgram = CreateGlShader(VertexShader, FragmentShader);
+    // Attach shaders to the drawcall
+    std::string vertexShaderSrc = ParseShaderFile("src/Window/GLShaders/Vertexshader.shader");
+    std::string fragmentShaderSrc = ParseShaderFile("src/Window/GLShaders/TextureFill.shader");
+    unsigned int shaderProgram = CreateGlShader(vertexShaderSrc, fragmentShaderSrc);
     glUseProgram(shaderProgram);
+
 
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window))
@@ -151,6 +165,7 @@ bool OpenglWindow::CreateWindow()
         // Render here
         glClear(GL_COLOR_BUFFER_BIT);
 
+        // Draw triangles
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // Swap front and back buffers

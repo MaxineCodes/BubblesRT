@@ -27,6 +27,7 @@ private:
 
 private:
 	// GL code
+	static std::string ParseShaderFile(const std::string& filePath);
 	static unsigned int CompileGlShader(unsigned int type, const std::string& source);
 	static unsigned int CreateGlShader(const std::string& vertexShader, const std::string& fragmentShader);
 

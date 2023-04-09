@@ -101,16 +101,12 @@
     <ClInclude Include="src\Datatypes\Vector2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Window\OpenglVertexshader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Window\OpenglFragmentshader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
     <None Include="README.md" />
+    <None Include="src\Window\GLShaders\Vertexshader.shader" />
+    <None Include="src\Window\GLShaders\TextureFill.shader" />
   </ItemGroup>
 </Project>
