@@ -160,6 +160,8 @@
     <ClInclude Include="src\Shapes\Mesh.h" />
     <ClInclude Include="src\Shapes\Polygon.h" />
     <ClInclude Include="src\Shapes\Sphere.h" />
+    <ClInclude Include="src\Window\OpenglFragmentshader.h" />
+    <ClInclude Include="src\Window\OpenglVertexshader.h" />
     <ClInclude Include="src\Window\OpenglWindow.h" />
     <ClInclude Include="src\Datatypes\Vector3.h" />
     <ClInclude Include="src\Datatypes\Vector2.h" />

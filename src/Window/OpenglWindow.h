@@ -20,9 +20,15 @@ public:
 	OpenglWindow(const char* windowName, const RTSettings& raytraceSettings);
 
 private:
+	// Window
 	void SetWindowName(const char* windowName);
 	void SetWindowSize(int width, int height);
 	bool CreateWindow();
+
+private:
+	// GL code
+	static unsigned int CompileGlShader(unsigned int type, const std::string& source);
+	static unsigned int CreateGlShader(const std::string& vertexShader, const std::string& fragmentShader);
 
 public:
 	// Draw an Image to the screen
@@ -32,4 +38,5 @@ public:
 	// If no Colour is given as a parameter, fill it with Magenta.
 	void ClearWindow(const Colour& fillColour=Colour::Magenta());
 };
+
 

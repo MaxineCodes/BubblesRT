@@ -5,6 +5,60 @@
 
 #include "../Datatypes/Vector2.h"
 
+#include "OpenglFragmentshader.h"
+#include "OpenglVertexshader.h"
+
+
+// Compiles the shader and returns the shaders ID
+unsigned int OpenglWindow::CompileGlShader(unsigned int type, const std::string& source)
+{
+    // Get the shader source code
+    unsigned int shaderID = glCreateShader(type);
+    const char* src = source.c_str();
+    glShaderSource(shaderID, 1, &src, nullptr);
+    // Compile the shader source code
+    glCompileShader(shaderID);
+
+    // Check if compiling went ok or not
+    int compileResult;
+    glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compileResult);
+    if (!compileResult)
+    {
+        // Print error message and return 0
+        int msgLength;
+        glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &msgLength);
+        char* errorMessage = (char*)alloca(msgLength * sizeof(char));
+        glGetShaderInfoLog(shaderID, msgLength, &msgLength, errorMessage);
+        std::cout << "ERROR: Failed to compile shader." << std::endl;
+        std::cout << errorMessage << std::endl;
+        glDeleteShader(shaderID);
+        return 0;
+    }
+
+    // Return the shader ID
+    return shaderID;
+}
+
+// Creates the gl shader program, returns its ID
+unsigned int OpenglWindow::CreateGlShader(const std::string& vertexShader, const std::string& fragmentShader)
+{
+    // Create shader program
+    unsigned int programID = glCreateProgram();
+    // Compile shader source files
+    unsigned int vertShader = CompileGlShader(GL_VERTEX_SHADER, vertexShader);
+    unsigned int fragShader = CompileGlShader(GL_FRAGMENT_SHADER, fragmentShader);
+    // Attach compiled shaders to shader program and link
+    glAttachShader(programID, vertShader);
+    glAttachShader(programID, fragShader);
+    glLinkProgram(programID);
+    glValidateProgram(programID);
+    // Delete shaders after program has been created
+    glDeleteShader(vertShader); glDeleteShader(fragShader);
+
+    // Return shader program ID
+    return programID;
+}
+
 // Constructor
 OpenglWindow::OpenglWindow(const char* windowName, int windowWidth, int windowHeight)
 {
@@ -75,7 +129,7 @@ bool OpenglWindow::CreateWindow()
 
 
     float positions[6] = {
-        -0.5f,  0.5f,
+        -0.5f, -0.5f,
          0.0f,  0.5f,
          0.5f, -0.5f
     };
@@ -84,6 +138,12 @@ bool OpenglWindow::CreateWindow()
     glGenBuffers(1, &buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float)*2, 0);
+
+    unsigned int shaderProgram = CreateGlShader(VertexShader, FragmentShader);
+    glUseProgram(shaderProgram);
 
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window))
@@ -99,6 +159,8 @@ bool OpenglWindow::CreateWindow()
         // Poll for and process events
         glfwPollEvents();
     }
+
+    glDeleteProgram(shaderProgram);
 
     glfwTerminate();
     return false;
