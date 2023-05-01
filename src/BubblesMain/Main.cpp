@@ -37,7 +37,7 @@
 // Includes
 #include "../Window/OpenglWindow.h"
 #include "../RTCore/Raytrace.h"
-
+#include "../Export/Export.h"
 
 // Entrypoint (Duh)
 int main(void)
@@ -45,24 +45,24 @@ int main(void)
     const int ImageWidth  = 640;
     const int ImageHeight = 480;
 
-    // Get Raytrace settings
+    // Get Raytrace Settings
     RTSettings raytraceSettings(ImageWidth, ImageHeight);
 
-    // Get scene
-    RTScene raytraceScene;
+    // Get Scene
+    std::string raytraceScenepath = "";
+    RTScene raytraceScene(raytraceScenepath);
 
-    // Generated Raytraced Image
-    Image RTOutput = Raytrace(
+    // Generate a raytraced image
+    Image RTOutput = raytrace(
         raytraceSettings,   // RTSettings
         raytraceScene,      // RTScene
         10                  // Sample Count
     );
 
-    // Initialize the window
-    const char* windowName = "BubblesRT";
-    OpenglWindow viewportWindow = OpenglWindow(windowName, raytraceSettings.ImageWidth, raytraceSettings.ImageHeight);
+    // Export raytraced image to disk
+    //exportAsPPM(RTOutput);
 
-    // Display Raytraced Image
-    viewportWindow.ClearWindow(Colour::Cyan());
-    viewportWindow.DrawImage(RTOutput);
+    // Initialize Opengl window and give it the output raytraced image to render
+    //const char* windowName = "BubblesRT";
+    //OpenglWindow viewportWindow = OpenglWindow(windowName, RTOutput);
 }

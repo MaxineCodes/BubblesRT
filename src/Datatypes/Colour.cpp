@@ -1,6 +1,7 @@
 #include "Colour.h"
 #include <cmath>
 
+
 // Assumes the input is between 0f-1f.
 Colour Colour::convertTo255(const Colour& colour)
 {

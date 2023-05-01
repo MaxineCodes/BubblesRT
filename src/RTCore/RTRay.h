@@ -6,3 +6,5 @@ class RTRay
 
 };
 
+// Type aliases
+using Ray = RTRay;

@@ -20,7 +20,6 @@ class Image
 public:
 	int m_width;
 	int m_height;
-private:
 	std::vector<Colour> m_pixelClr;
 
 public:
@@ -29,10 +28,14 @@ public:
 	Image(int width, int height, const Colour& fillColour);
 
 public:
-	int GetWidth();
-	int GetHeight();
+	int getWidth();
+	int getHeight();
+
 	// Add an individual pixel according to the UV coords
-	void InsertPixel(int u, int v, const Colour& pixelCltr);
-	void InsertPixelVector(const std::vector<Colour>& pixelCtrlVector);
+	void insertPixel(const Colour& pixelColour);
+	void insertPixelVector(const std::vector<Colour>& pixelCtrlVector);
+	Colour getPixelColour(int u, int v);
+
+	static Image generateTestImage(int width, int height);
 };
 

@@ -1,10 +1,21 @@
+/////////////////////////////////////////////////////////////////////////////////////////////
+// 
+//	OpenglWindow.h
+//
+//	Description:
+//	 Creates a OpenGL window to render the output raytrace image to.
+// 
+//  
+/////////////////////////////////////////////////////////////////////////////////////////////
 #pragma once
+
 
 #include <iostream>
 
 #include "../Datatypes/Image.h"
 #include "../Datatypes/Colour.h"
 #include "../RTCore/RTSettings.h"
+
 
 class OpenglWindow
 {
@@ -27,13 +38,14 @@ private:
 
 private:
 	// GL code
+	static void EmptyVAO();
 	static std::string ParseShaderFile(const std::string& filePath);
 	static unsigned int CompileGlShader(unsigned int type, const std::string& source);
 	static unsigned int CreateGlShader(const std::string& vertexShader, const std::string& fragmentShader);
 
 public:
 	// Draw an Image to the screen
-	void DrawImage(const Image& image);
+	//void DrawImage(const Image& image);
 
 	// Clear the window and fill with a Colour. 
 	// If no Colour is given as a parameter, fill it with Magenta.

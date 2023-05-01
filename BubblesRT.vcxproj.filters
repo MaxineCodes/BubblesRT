@@ -48,6 +48,21 @@
     <ClCompile Include="src\Datatypes\Vector2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Export\ExportPPM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Export\ExportBMP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RTCore\RTSettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cameras\PerspectiveCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RTCore\RTObjectList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Window\OpenglWindow.h">
@@ -62,16 +77,10 @@
     <ClInclude Include="src\Datatypes\Image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Export\ExportPPM.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Maths\VectorMaths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Maths\Maths.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Export\ExportBMP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CmdsInterface\CmdsInterface.h">
@@ -99,6 +108,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Datatypes\Vector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Export\Export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shapes\Shape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Materials\Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cameras\PerspectiveCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RTCore\RTObjectList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

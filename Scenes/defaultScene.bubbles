@@ -1,0 +1,15 @@
+scene name DefaultScene
+
+img width 640
+img height 480
+
+cam type perspectivecamera
+cam positionx 10
+cam positiony 5
+cam positionz 2.5
+cam lookDirectionx 2.5
+cam lookDirectiony 5
+cam lookDirectionz 10
+cam fov 60
+cam aperture 10
+cam focusDistance 10
