@@ -13,3 +13,11 @@ cam lookDirectionz 10
 cam fov 60
 cam aperture 10
 cam focusDistance 10
+
+shape name shape0
+shape0 type sphere
+shape0 positionx = 1
+shape0 positiony = 0.5
+shape0 positionz = 0.25
+shape0 radius = 3
+shape0 material mat1

@@ -1,78 +1,172 @@
 #include "RTScene.h"
 
-void RTScene::loadSceneFile(std::string scenepath)
+#include "../Import/Deserializer.h"
+
+#include <vector>
+
+
+// Load the scene and create all the objects in the scene from the file
+// given with the scene path.
+void RTScene::loadScene(const std::string& scenepath)
 {
-	std::fstream sceneFile;
+	// Parse the data from the scene file
+	std::vector<std::string>* parsedFileData = Deserializer::parseSceneFile(scenepath);
 
-	// Reading scenefile
-	sceneFile.open(scenepath, std::ios::in);
-	if (sceneFile.is_open())
-	{
-		// Data comes in three sections : the type, the key, and the value.
-		// Example: "cam type perspectivecamera".
-		// So we store them as three vectors for easy iteration to write to later
-		std::vector<std::string> dataTypes;
-		std::vector<std::string> dataKeys;
-		std::vector<std::string> dataValues;
+	// Get the camera from the scene file
+	//m_camera = Deserializer::deserializeSceneCamera(parsedFileData);
+	//createCameraFromFile(parsedFileData);
 
-		// ...And then I store all those vectors in an array.
-		m_fileData[0] = dataTypes;
-		m_fileData[1] = dataKeys;
-		m_fileData[2] = dataValues;
-			
+	const Vector3 camPosition(0, 1, 8);
+	const Vector3 camLookDirection(0, 0, -1);
+	const Vector3 viewUp(0, 1, 0);
+	const float fov = 60;
+	const float aperture = 0.0;
+	const float focusDistance = (camPosition - camLookDirection).length();
+	const float aspectRatio = 640 / 640;
 
-		// Write the data from the scene file into the data vectors
-		std::string dataType, dataKey, dataValue;
-		while (sceneFile >> dataType >> dataKey >> dataValue)
-		{
-			m_fileData[0].push_back(dataType);
-			m_fileData[1].push_back(dataKey);
-			m_fileData[2].push_back(dataValue);
-		}
+	m_camera = PerspectiveCamera(
+		camPosition,
+		camLookDirection,
+		viewUp,
+		fov,
+		aspectRatio,
+		aperture,
+		focusDistance);
 
-		createCameraFromFile();
-
-		sceneFile.close();
-	}
+	// Add shapes from the scene file to the sceneObjectList
+	loadMaterials(parsedFileData);
+	loadShapes(parsedFileData);
 }
 
-std::string RTScene::getFileStringValue(const char* type, const char* key)
+void RTScene::loadShapes(std::vector<std::string>*& parsedFileData)
+{
+	Vector3 center = Vector3(0, 0, -5);
+	float radius = 0.5;
+	auto material = std::make_shared<Lambert>(Colour(0.5, 0.5, 0.5));
+	auto sphere1 = std::make_shared <Sphere>(center, radius, material);
+
+	m_sceneObjectList.add(sphere1);
+
+
+	auto groundmaterial = std::make_shared<Lambert>(Colour(0.4, 0.8, 0.2));
+	auto sphere2 = std::make_shared <Sphere>(Vector3(0, -100.5, 0), 100, groundmaterial);
+	
+	m_sceneObjectList.add(sphere2);
+};
+
+void RTScene::addShape(std::shared_ptr<Shape> shape)
+{
+	m_sceneObjectList.add(shape);
+}
+
+void RTScene::loadMaterials(std::vector<std::string>*& parsedFileData)
+{
+
+}
+
+
+const std::string RTScene::getFileStringValue(std::vector<std::string>* parsedFileData, const char* type, const char* key)
 {
 	std::string dataType = type;
 	std::string dataKey = key;
 
-	for (int i = 0; i < m_fileData[0].size(); i++)
+	for (int i = 0; i < m_sceneFileData[0].size(); i++)
 	{
-		if (m_fileData[0][i] == dataType)
+		if (m_sceneFileData[0][i] == dataType)
 		{
-			if (m_fileData[1][i] == dataKey)
+			if (m_sceneFileData[1][i] == dataKey)
 			{
-				return m_fileData[2][i];
+				return m_sceneFileData[2][i];
 			}
 		}
 	}
-	return "No value found";
+	return "none";
 }
 
-void RTScene::createCameraFromFile()
+
+// Creates a camera from data inside of the scene file
+void RTScene::createCameraFromFile(std::vector<std::string>* parsedFileData)
 {
-	float positionX = std::stof(getFileStringValue("cam", "positionx"));
-	float positionY = std::stof(getFileStringValue("cam", "positiony"));
-	float positionZ = std::stof(getFileStringValue("cam", "positionz"));
-	Vector3 camPosition(positionX, positionY, positionZ);
+	// Turn string data from file to usable data
+	const float positionX = std::stof(getFileStringValue(parsedFileData, "cam", "positionx"));
+	const float positionY = std::stof(getFileStringValue(parsedFileData, "cam", "positiony"));
+	const float positionZ = std::stof(getFileStringValue(parsedFileData, "cam", "positionz"));
+	const Vector3 camPosition(positionX, positionY, positionZ);
 
-	float lookDirectionX = std::stof(getFileStringValue("cam", "positionx"));
-	float lookDirectionY = std::stof(getFileStringValue("cam", "positiony"));
-	float lookDirectionZ = std::stof(getFileStringValue("cam", "positionz"));
-	Vector3 camLookDirection(lookDirectionX, lookDirectionY, lookDirectionZ);
+	const float lookDirectionX = std::stof(getFileStringValue(parsedFileData, "cam", "positionx"));
+	const float lookDirectionY = std::stof(getFileStringValue(parsedFileData, "cam", "positiony"));
+	const float lookDirectionZ = std::stof(getFileStringValue(parsedFileData, "cam", "positionz"));
+	const Vector3 camLookDirection(lookDirectionX, lookDirectionY, lookDirectionZ);
 
-	float fov = std::stof(getFileStringValue("cam", "fov"));
-	float aperture = std::stof(getFileStringValue("cam", "aperture"));
-	float focusDistance = std::stof(getFileStringValue("cam", "focusDistance"));
+	const Vector3 viewUp(0, 0, 0);
 
-	//float aspectRatio = std::stof(getFileStringValue(fileData, "cam", "fov"));
+	const float fov = std::stof(getFileStringValue(parsedFileData, "cam", "fov"));
+	const float aperture = std::stof(getFileStringValue(parsedFileData, "cam", "aperture"));
+	const float focusDistance = std::stof(getFileStringValue(parsedFileData, "cam", "focusDistance"));
 
-	std::cout << focusDistance << std::endl;
+	const float imgWidth = std::stof(getFileStringValue(parsedFileData, "img", "width"));
+	const float imgHeight = std::stof(getFileStringValue(parsedFileData, "img", "height"));
+	const float aspectRatio = imgHeight / imgWidth;
+
+	// Create perspective camera
+	if (getFileStringValue(parsedFileData, "cam", "type") == "perspectivecamera")
+	{
+		m_camera = PerspectiveCamera(
+			camPosition,
+			camLookDirection,
+			viewUp,
+			fov,
+			aspectRatio,
+			aperture,
+			focusDistance);
+	}
+}
+
+
+void RTScene::populateSceneFromFile()
+{
+	//// Create a place to store all the shape names.
+	//std::vector<std::string> shapesNamesInFile;
+	//
+	//// Get all the shape names and store them in the vector.
+	//for (int i = 0; i < m_sceneFileData[0].size(); i++)
+	//{
+	//	if (m_sceneFileData[0][i] == "shape" && m_sceneFileData[1][i] == "name")
+	//	{
+	//		shapesNamesInFile.push_back(m_sceneFileData[2][i]);
+	//	}
+	//}
+	//
+	//for (int i = 0; i < shapesNamesInFile.size(); i++)
+	//{
+	//	const char* shapeName = shapesNamesInFile[i].c_str();
+	//
+	//	// Get the shape type
+	//	const std::string shapeType = getFileStringValue(shapeName, "type");
+	//
+	//	if (shapeType == "sphere")
+	//	{
+	//		const float positionX = std::stof(getFileStringValue(shapeName, "positionx"));
+	//		const float positionY = std::stof(getFileStringValue(shapeName, "positiony"));
+	//		const float positionZ = std::stof(getFileStringValue(shapeName, "positionz"));
+	//		const Vector3 shapePosition(positionX, positionY, positionZ);
+	//
+	//		const float radius = std::stof(getFileStringValue(shapeName, "radius"));
+	//
+	//		const std::string materialName = getFileStringValue(shapeName, "material");
+	//	}
+	//}
+}
+
+
+PerspectiveCamera RTScene::getCamera()
+{
+	return m_camera;
+}
+
+RTObjectList RTScene::getObjectList()
+{
+	return m_sceneObjectList;
 }
 
 std::string RTScene::getScenePath()
@@ -80,7 +174,23 @@ std::string RTScene::getScenePath()
 	return m_scenePath;
 }
 
+
 std::string RTScene::getSceneName()
 {
-	return getFileStringValue("scene", "name");
+	//return getFileStringValue("scene", "name");
+	return "tmp_scene_name";
+}
+
+
+void RTScene::printInfo()
+{
+	std::cout << "====[ RTScene ]====================" << std::endl;
+	std::cout << "Scene Name:   " << getSceneName() << std::endl;
+	std::cout << "Scene Path:   " << getScenePath() << std::endl;
+	std::cout << std::endl;
+	std::cout << "Cam Type:     " << m_camera.getType() << std::endl;
+	std::cout << "Cam Position: " << m_camera.m_position << std::endl;
+	std::cout << "Cam Look Dir: " << m_camera.m_lookDirection << std::endl;
+	std::cout << "Cam UV:       " << m_camera.m_u << " | " << m_camera.m_v << std::endl;
+	std::cout << "===================================" << std::endl << std::endl;
 }

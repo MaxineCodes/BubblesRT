@@ -10,6 +10,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 #pragma once
 
+#include <iostream>
+
 
 class Vector3
 {
@@ -45,8 +47,8 @@ public:
 	// Handy maths
 	double length() const;
 	double lengthSquared() const;
-	inline static Vector3 random();
-	inline static Vector3 random(float min, float max);
+	static Vector3 random();
+	static Vector3 random(float min, float max);
 	bool nearZero() const;
 
 	// Presets
@@ -54,6 +56,7 @@ public:
 };
 
 // extern inline Vector3 operator methods
+extern inline std::ostream& operator<<(std::ostream& out, const Vector3& v);
 extern inline Vector3 operator+(const Vector3& u, const Vector3& v);
 extern inline Vector3 operator-(const Vector3& u, const Vector3& v);
 extern inline Vector3 operator*(const Vector3& u, const Vector3& v);

@@ -26,6 +26,10 @@ public:
 	float g() const { return e[1]; }
 	float b() const { return e[2]; }
 
+	// operator methods
+	Colour& operator+=(const Colour& colour);
+	Colour& operator*=(const float value);
+
 	// Convert [0f-1f] to [0-255]
 	Colour convertTo255(const Colour& colour);
 
@@ -44,6 +48,12 @@ public:
 	static Colour BubblePurple()	{ return Colour(0.81f, 0.31f, 0.92f); }
 
 };
+
+Colour operator+(const Colour& cA, const Colour& cB);
+
+Colour operator*(const Colour& cA, const Colour& cB);
+Colour operator*(float value, const Colour& colour);
+Colour operator*(const Colour& colour, float value);
 
 // Type aliases
 using Vector3colour = Colour;

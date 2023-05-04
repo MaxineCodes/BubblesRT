@@ -22,7 +22,7 @@ const double radial = cos(pi / 4);
 
 //// Math functions
 
-inline float degreesToRadians(float degrees);
+float degreesToRadians(float degrees);
 float randomFloat();
 float randomFloat(float min, float max);
-inline float clamp(float value, float min, float max);
+float clamp(float value, float min, float max);

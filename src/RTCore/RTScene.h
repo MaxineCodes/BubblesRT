@@ -15,7 +15,6 @@
 
 #include <vector>
 #include <string>
-#include <fstream>
 #include <iostream>
 
 #include "../Cameras/PerspectiveCamera.h"
@@ -28,47 +27,62 @@ private:
 
 	std::string m_scenePath = "";
 	std::string m_defaultScenepath = 
-		"D:\\Dev\\2023\\BubblesRT\\BubblesRT\\Scenes\\defaultScene.bubbles";
+		"BubblesRT\\Scenes\\defaultScene.bubbles";
 
-	std::vector<std::string> m_fileData[3];
+	std::vector<std::string> m_sceneFileData[3];
 
 	// Camera
 	PerspectiveCamera m_camera;
 
 	// World object to contain all intersectable objects
-	//RTObjectList sceneObjectList;
+	RTObjectList m_sceneObjectList;
+
+	//std::vector<Material> m_materials;
+	//std::vector<Light> m_lights;
+
+public:
+	const Colour skyGradientTop = Colour::White();
+	const Colour skyGradientBottom = Colour::BubbleBlue();
 
 public:
 
 	// Default constructor
-	RTScene(std::string scenepath)
+	RTScene(std::string& scenepath)
 	{
-		std::cout << "RTScene Constructor" << std::endl;
-
 		if (scenepath != "")
 		{
 			m_scenePath = scenepath;
-			loadSceneFile(scenepath);
+			loadScene(scenepath);
 		}
 
 		else 
 		{
 			m_scenePath = m_defaultScenepath;
-			loadSceneFile(m_scenePath);
+			loadScene(m_scenePath);
 		}
 	}
 
 private:
 
-	void loadSceneFile(std::string scenepath);
+	// Load the scene and start all the necessary functions.
+	void loadScene(const std::string& scenepath);
 
-	std::string getFileStringValue(const char* type, const char* key);
-	
-	void createCameraFromFile();
+	void loadMaterials(std::vector<std::string>*& parsedFileData);
+	void loadShapes(std::vector<std::string>*& parsedFileData);
+
+	void addShape(std::shared_ptr<Shape>);
+
+	void createCameraFromFile(std::vector<std::string>* parsedFileData);
+	void populateSceneFromFile();
+
+	const std::string getFileStringValue(std::vector<std::string>* parsedFileData, const char* type, const char* key);
 
 public:
 
+	PerspectiveCamera getCamera();
+	RTObjectList getObjectList();
 	std::string getScenePath();
 	std::string getSceneName();
+	void printInfo();
 };
 

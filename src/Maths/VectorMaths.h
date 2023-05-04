@@ -15,13 +15,13 @@
 #include "../Datatypes/Vector3.h"
 
 
-inline double dot(const Vector3& vA, const Vector3& vB);
-inline Vector3 cross(const Vector3& vA, const Vector3& vB);
+extern float dot(const Vector3& vA, const Vector3& vB);
+extern Vector3 cross(const Vector3& vA, const Vector3& vB);
 
-inline Vector3 unitVector(Vector3 vector);
-static Vector3 randomUnitVector();
-static Vector3 randomUnitVectorSphere();
-static Vector3 randomUnitVectorDisk();
+extern Vector3 unitVector(Vector3 vector);
+extern Vector3 randomUnitVector();
+extern Vector3 randomUnitVectorSphere();
+extern Vector3 randomUnitVectorDisk();
 
-static Vector3 reflect(const Vector3& vector, const Vector3& normal);
-static Vector3 refract(const Vector3& uv, const Vector3& normal, double etaiOverEtat);
+extern Vector3 reflect(const Vector3& vector, const Vector3& normal);
+extern Vector3 refract(const Vector3& uv, const Vector3& normal, float etaiOverEtat);

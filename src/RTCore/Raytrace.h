@@ -31,6 +31,7 @@
 
 #include "../Datatypes/Image.h"
 #include "../Datatypes/Colour.h"
+#include "../Cameras/PerspectiveCamera.h"
 #include "RTSettings.h"
 #include "RTScene.h"
 #include "RTRay.h"
@@ -42,6 +43,25 @@ Image raytrace(
 	const int sampleCount
 );
 
-// Print functions
-void printRTSettings(RTSettings& settings, const int sampleCount);
-void printRTSceneInfo(RTScene& scene);
+Colour calculateRayColour(
+	RTRay ray,
+	RTScene& scene,
+	RTSettings& settings
+);
+
+Colour raytraceRay(
+	const RTRay ray,
+	const RTObjectList& objectList,
+	const int bounces
+);
+
+Colour raytraceRayNormalColour(
+	const RTRay ray,
+	const RTObjectList& objectList
+);
+
+// Get the sky colour according to the rays vector
+Colour skyGradient(const RTRay ray);
+
+// Scale the colour according to the sample count
+Colour scaleColourPerSample(Colour colour, const int sampleCount);

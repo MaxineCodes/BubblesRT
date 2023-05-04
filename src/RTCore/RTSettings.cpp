@@ -15,6 +15,11 @@ float RTSettings::getRenderScale()
 	return m_renderScale;
 }
 
+const int RTSettings::getRayBounceCount()
+{
+	return m_rayBounceCount;
+}
+
 bool RTSettings::getAntialiasing()
 {
 	return m_antialiasing;
@@ -64,4 +69,33 @@ void RTSettings::setNormalDebug(bool enabled)
 void RTSettings::setDepthDebug(bool enabled)
 {
 	m_depthDebug = enabled;
+}
+
+void RTSettings::printInfo(const int sampleCount)
+{
+	std::cout << "====[ RTSettings ]=================" << std::endl;
+	if (m_sampleCount > 1)
+		std::cout << "Sample Count: " << m_sampleCount << std::endl;
+	else
+		std::cout << "Sample Count: " << sampleCount << std::endl;
+
+	std::cout << "ImageWidth:   " << m_imageWidth << std::endl;
+	std::cout << "ImageHeight:  " << m_imageHeight << std::endl;
+	std::cout << "RenderScale:  " << m_renderScale << std::endl;
+
+	std::cout << std::endl;
+
+	if (m_antialiasing)
+		std::cout << "Antialiasing: " << "Enabled" << std::endl;
+	else std::cout << "Antialiasing: " << "Disabled" << std::endl;
+
+	if (m_normalDebug)
+		std::cout << "NormalDebug:  " << "Enabled" << std::endl;
+	else std::cout << "NormalDebug:  " << "Disabled" << std::endl;
+
+	if (m_depthDebug)
+		std::cout << "DepthDebug:   " << "Enabled" << std::endl;
+	else std::cout << "DepthDebug:   " << "Disabled" << std::endl;
+
+	std::cout << "===================================" << std::endl << std::endl;
 }

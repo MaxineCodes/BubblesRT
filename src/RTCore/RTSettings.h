@@ -11,6 +11,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 #pragma once
 
+#include <iostream>
+
 
 class RTSettings
 {
@@ -21,6 +23,8 @@ public:
 	float m_renderScale = 1.0f;
 
 	// Render
+	int m_sampleCount = 1;
+	int m_rayBounceCount = 10;
 	bool m_antialiasing = false;
 
 	// Debug Render
@@ -41,6 +45,7 @@ public:
 	int getWidth();
 	int getHeight();
 	float getRenderScale();
+	const int getRayBounceCount();
 	bool getAntialiasing();
 	bool getNormalDebug();
 	bool getDepthDebug();
@@ -53,4 +58,6 @@ public:
 	void setAntiAliasing(bool enabled);
 	void setNormalDebug(bool enabled);
 	void setDepthDebug(bool enabled);
+
+	void printInfo(const int sampleCount);
 };

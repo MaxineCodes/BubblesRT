@@ -133,6 +133,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Materials\Lambert.cpp" />
+    <ClCompile Include="src\RTCore\RTCollision.cpp" />
+    <ClCompile Include="src\Import\Deserializer.cpp" />
+    <ClCompile Include="src\Cameras\Camera.cpp" />
     <ClCompile Include="src\RTCore\RTObjectList.cpp" />
     <ClCompile Include="src\Cameras\PerspectiveCamera.cpp" />
     <ClCompile Include="src\Export\ExportBMP.cpp" />
@@ -145,12 +149,17 @@
     <ClCompile Include="src\Maths\Maths.cpp" />
     <ClCompile Include="src\Maths\VectorMaths.cpp" />
     <ClCompile Include="src\RTCore\RTSettings.cpp" />
+    <ClCompile Include="src\Shapes\Sphere.cpp" />
     <ClCompile Include="src\Window\OpenglWindow.cpp" />
     <ClCompile Include="src\BubblesMain\Main.cpp" />
     <ClCompile Include="src\Datatypes\Vector3.cpp" />
     <ClCompile Include="src\Datatypes\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Materials\Lambert.h" />
+    <ClInclude Include="src\RTCore\RTCollision.h" />
+    <ClInclude Include="src\Import\Deserializer.h" />
+    <ClInclude Include="src\Cameras\Camera.h" />
     <ClInclude Include="src\RTCore\RTObjectList.h" />
     <ClInclude Include="src\Cameras\PerspectiveCamera.h" />
     <ClInclude Include="src\Export\Export.h" />

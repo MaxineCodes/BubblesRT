@@ -1,6 +1,5 @@
 #include "Vector3.h"
 #include "../Maths/Maths.h"
-#include <iostream>
 
 //// Vector3 Method Declarations
 
@@ -99,11 +98,11 @@ double Vector3::lengthSquared() const
 {
 	return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
 }
-inline Vector3 Vector3::random()
+Vector3 Vector3::random()
 {
 	return Vector3(randomFloat(), randomFloat(), randomFloat());
 }
-inline Vector3 Vector3::random(float min, float max)
+Vector3 Vector3::random(float min, float max)
 {
 	return Vector3(randomFloat(min, max), randomFloat(min, max), randomFloat(min, max));
 }
