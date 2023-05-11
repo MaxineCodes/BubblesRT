@@ -44,7 +44,7 @@ int main(void)
 {
     const int ImageWidth  = 640;
     const int ImageHeight = 640;
-    const int samepleCount = 5;
+    const int samepleCount = 1;
 
     // Get Raytrace Settings
     RTSettings raytraceSettings(ImageWidth, ImageHeight);
@@ -64,7 +64,7 @@ int main(void)
     );
 
     // Export raytraced image to disk
-    exportAsPPM(RTOutput);
+    //exportAsPPM(RTOutput);
 
     // Initialize Opengl window and give it the output raytraced image to render
     //const char* windowName = "BubblesRT";

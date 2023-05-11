@@ -26,8 +26,11 @@ class RTScene
 private:
 
 	std::string m_scenePath = "";
-	std::string m_defaultScenepath = 
-		"BubblesRT\\Scenes\\defaultScene.bubbles";
+	//std::string m_defaultScenepath = 
+	//	"BubblesRT\\Scenes\\defaultScene.bubbles";
+
+	std::string m_defaultScenepath =
+		"D:\\Dev\\2023\\BubblesRT\\BubblesRT\\Scenes\\defaultScene.bubbles";
 
 	std::vector<std::string> m_sceneFileData[3];
 

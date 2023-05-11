@@ -86,15 +86,15 @@ void RTSettings::printInfo(const int sampleCount)
 	std::cout << std::endl;
 
 	if (m_antialiasing)
-		std::cout << "Antialiasing: " << "Enabled" << std::endl;
+		 std::cout << "Antialiasing: " << "Enabled" << std::endl;
 	else std::cout << "Antialiasing: " << "Disabled" << std::endl;
 
 	if (m_normalDebug)
-		std::cout << "NormalDebug:  " << "Enabled" << std::endl;
+		 std::cout << "NormalDebug:  " << "Enabled" << std::endl;
 	else std::cout << "NormalDebug:  " << "Disabled" << std::endl;
 
 	if (m_depthDebug)
-		std::cout << "DepthDebug:   " << "Enabled" << std::endl;
+		 std::cout << "DepthDebug:   " << "Enabled" << std::endl;
 	else std::cout << "DepthDebug:   " << "Disabled" << std::endl;
 
 	std::cout << "===================================" << std::endl << std::endl;

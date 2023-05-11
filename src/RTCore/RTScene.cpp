@@ -2,6 +2,8 @@
 
 #include "../Import/Deserializer.h"
 
+#include "../Serialisation/Deserialiser.h"
+
 #include <vector>
 
 
@@ -36,6 +38,17 @@ void RTScene::loadScene(const std::string& scenepath)
 	// Add shapes from the scene file to the sceneObjectList
 	loadMaterials(parsedFileData);
 	loadShapes(parsedFileData);
+	
+	//std::string fileAsString = parseFileToString(scenepath);
+	//std::cout << fileAsString << std::endl;
+
+	NodeWithChildren sceneRootNode = parseSceneFile(scenepath);
+	std::cout << "sceneRootNode:" << sceneRootNode.m_nodeName << std::endl;
+
+	Node cameraNode = sceneRootNode.getNode("CAMERA");
+	std::string type = cameraNode.getValue("type");
+
+	std::cout << type << std::endl;
 }
 
 void RTScene::loadShapes(std::vector<std::string>*& parsedFileData)
