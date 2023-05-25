@@ -176,9 +176,6 @@
     <None Include="RenderOutputs\RenderOutput.ppm" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\wall.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="img\Logo\icon.png">
       <Filter>Resource Files</Filter>
     </Image>

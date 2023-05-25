@@ -196,7 +196,6 @@
     <None Include="src\Window\GLShaders\Vertexshader.shader" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\wall.jpg" />
     <Image Include="img\Banner%402x.png" />
     <Image Include="img\Banner%404x.png" />
     <Image Include="img\Logo\icon%400.5x.png" />

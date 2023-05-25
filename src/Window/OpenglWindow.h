@@ -3,7 +3,12 @@
 //	OpenglWindow.h
 //
 //	Description:
-//	 Creates a OpenGL window to render the output raytrace image to.
+//	 Viewport window to see raytrace render result in!
+//	 This is the class where I dump all opengl related code, it is a bit messy
+//	 but it does what it needs to do. 
+// 
+//	 This is a seperate thing to the renderer as it is not an integral part 
+//   to any raytracing function.
 // 
 //  
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,10 +33,7 @@ private:
 	GLFWwindow* m_window;
 
 public:
-	// Constructors
-	//OpenglWindow(const char* windowName, int windowWidth, int windowHeight);
 	OpenglWindow(const char* windowName, const Image& image);
-	//OpenglWindow(const char* windowName, const RTSettings& raytraceSettings);
 
 private:
 	// Window
@@ -40,8 +42,7 @@ private:
 	bool createWindow(const Image& image);
 
 private:
-	// GL code
-	static void emptyVAO();
+	// Opengl code
 	static std::string parseShaderFile(const std::string& filePath);
 	static unsigned int compileGlShader(unsigned int type, const std::string& source);
 	static unsigned int createGlShader(const std::string& vertexShader, const std::string& fragmentShader);
@@ -49,9 +50,6 @@ private:
 	static void createRectangle(unsigned int VAO, unsigned int VBO, unsigned int EBO);
 
 public:
-	// Draw an Image to the screen
-	void drawImage(const Image& image);
-
 	// Clear the window and fill with a Colour. 
 	// If no Colour is given as a parameter, fill it with Magenta.
 	void clearWindow(const Colour& fillColour=Colour::Magenta());

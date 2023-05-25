@@ -3,15 +3,6 @@
 #include <string>
 #include <fstream>
 
-// Create an empty vertex array buffer
-void OpenglWindow::emptyVAO()
-{
-    // Empty VAO
-    unsigned int vao;
-    glCreateVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-}
-
 // Parse .shader file as a string
 std::string OpenglWindow::parseShaderFile(const std::string& filePath)
 {
@@ -72,7 +63,6 @@ unsigned int OpenglWindow::createGlShader(const std::string& vertexShader, const
 
 unsigned int OpenglWindow::createTexture(const Image& image)
 {
-    // Generate and bind texture
     unsigned int textureID;
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_2D, textureID);
@@ -88,8 +78,12 @@ unsigned int OpenglWindow::createTexture(const Image& image)
     const int floatsInImage  = coloursInImage * 3;
 
     float* pixels = new float[floatsInImage];
-    std::vector<float> imagePixelfloats;
 
+    // Write rgb floats from the image colour vector and
+    // copy it into the pixels array.
+    // This conversion is also the biggest performance hit when it comes to
+    // drawing the RT output to the viewport.
+    std::vector<float> imagePixelfloats;
     for (int i = coloursInImage-1; i > 0; i--)
     {
         imagePixelfloats.push_back(image.m_pixelClr[i].r());
@@ -98,6 +92,7 @@ unsigned int OpenglWindow::createTexture(const Image& image)
     }
     std::copy(imagePixelfloats.begin(), imagePixelfloats.end(), pixels);
 
+    // Create opengl texture from pixels array
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_FLOAT, pixels);
     glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -140,26 +135,8 @@ void OpenglWindow::createRectangle(unsigned int VAO, unsigned int VBO, unsigned 
     glEnableVertexAttribArray(2);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    glBindVertexArray(VAO);
 }
 
-void OpenglWindow::drawImage(const Image& image)
-{
-    // Create a texture
-    unsigned int texture = createTexture(image);
-    glBindTexture(GL_TEXTURE_2D, texture);
-}
-
-// Constructor
-//OpenglWindow::OpenglWindow(const char* windowName, int windowWidth, int windowHeight)
-//{
-//    std::cout << std::endl << "Constructing Opengl window.." << std::endl;
-//    setWindowName(windowName);
-//    setWindowSize(windowWidth, windowHeight);
-//    if (!createWindow()) 
-//        std::cout << "ERROR: OpenglWindow.CreateWindow something went wrong." << std::endl;
-//}
 // Constructor
 OpenglWindow::OpenglWindow(const char* windowName, const Image& image)
 {
@@ -169,15 +146,6 @@ OpenglWindow::OpenglWindow(const char* windowName, const Image& image)
     if (!createWindow(image))
         std::cout << "ERROR: OpenglWindow.CreateWindow something went wrong." << std::endl;
 }
-// Constructor
-//OpenglWindow::OpenglWindow(const char* windowName, const RTSettings& raytraceSettings)
-//{
-//    std::cout << std::endl << "Constructing Opengl window.." << std::endl;
-//    setWindowName(windowName);
-//    setWindowSize(raytraceSettings.m_imageWidth, raytraceSettings.m_imageHeight);
-//    if (!createWindow())
-//        std::cout << "ERROR: OpenglWindow.CreateWindow something went wrong." << std::endl;
-//}
 
 void OpenglWindow::setWindowName(const char* windowName) 
 {
@@ -208,8 +176,6 @@ bool OpenglWindow::createWindow(const Image& image)
 
     // Make the window's context current
     glfwMakeContextCurrent(m_window);
-
-    //m_window = window;
 
     std::cout << "GL_VERSION: " << glGetString(GL_VERSION) << std::endl;
 
