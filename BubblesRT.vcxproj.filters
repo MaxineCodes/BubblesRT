@@ -171,5 +171,67 @@
     <None Include="README.md" />
     <None Include="src\Window\GLShaders\Vertexshader.shader" />
     <None Include="src\Window\GLShaders\TextureFill.shader" />
+    <None Include="Scenes\testScene.zip" />
+    <None Include="Scenes\defaultScene.bubbles" />
+    <None Include="RenderOutputs\RenderOutput.ppm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\wall.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Logo\icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Logo\icon%400.5x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Logo\icon%402x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Logo\icon_bk.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Logo\icon_bk%400.5x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Logo\icon_bk%402x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Logo\logo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Logo\logo%400.5x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Logo\logo%402x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Logo\logo_bk.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Logo\logo_bk%400.5x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Logo\logo_bk%402x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Banner%402x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Banner%404x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Webimg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Webimg%400.5x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Webimg%402x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\Webimg%404x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

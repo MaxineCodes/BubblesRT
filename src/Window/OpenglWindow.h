@@ -11,6 +11,8 @@
 
 
 #include <iostream>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 #include "../Datatypes/Image.h"
 #include "../Datatypes/Colour.h"
@@ -23,33 +25,36 @@ private:
 	const char* m_windowName = "BubblesRT";
 	int m_windowWidth = 20;
 	int m_windowHeight = 20;
+	GLFWwindow* m_window;
 
 public:
 	// Constructors
-	OpenglWindow(const char* windowName, int windowWidth, int windowHeight);
+	//OpenglWindow(const char* windowName, int windowWidth, int windowHeight);
 	OpenglWindow(const char* windowName, const Image& image);
-	OpenglWindow(const char* windowName, const RTSettings& raytraceSettings);
+	//OpenglWindow(const char* windowName, const RTSettings& raytraceSettings);
 
 private:
 	// Window
-	void SetWindowName(const char* windowName);
-	void SetWindowSize(int width, int height);
-	bool CreateWindow();
+	void setWindowName(const char* windowName);
+	void setWindowSize(int width, int height);
+	bool createWindow(const Image& image);
 
 private:
 	// GL code
-	static void EmptyVAO();
-	static std::string ParseShaderFile(const std::string& filePath);
-	static unsigned int CompileGlShader(unsigned int type, const std::string& source);
-	static unsigned int CreateGlShader(const std::string& vertexShader, const std::string& fragmentShader);
+	static void emptyVAO();
+	static std::string parseShaderFile(const std::string& filePath);
+	static unsigned int compileGlShader(unsigned int type, const std::string& source);
+	static unsigned int createGlShader(const std::string& vertexShader, const std::string& fragmentShader);
+	static unsigned int createTexture(const Image& image);
+	static void createRectangle(unsigned int VAO, unsigned int VBO, unsigned int EBO);
 
 public:
 	// Draw an Image to the screen
-	//void DrawImage(const Image& image);
+	void drawImage(const Image& image);
 
 	// Clear the window and fill with a Colour. 
 	// If no Colour is given as a parameter, fill it with Magenta.
-	void ClearWindow(const Colour& fillColour=Colour::Magenta());
+	void clearWindow(const Colour& fillColour=Colour::Magenta());
 };
 
 

@@ -1,12 +1,10 @@
 #include "OpenglWindow.h"
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <string>
 #include <fstream>
 
 // Create an empty vertex array buffer
-void OpenglWindow::EmptyVAO()
+void OpenglWindow::emptyVAO()
 {
     // Empty VAO
     unsigned int vao;
@@ -15,16 +13,15 @@ void OpenglWindow::EmptyVAO()
 }
 
 // Parse .shader file as a string
-std::string OpenglWindow::ParseShaderFile(const std::string& filePath)
+std::string OpenglWindow::parseShaderFile(const std::string& filePath)
 {
     std::string file_content;
     std::getline(std::ifstream(filePath), file_content, '\0');
     return file_content;
-
 }
 
 // Compiles the shader and returns the shaders ID
-unsigned int OpenglWindow::CompileGlShader(unsigned int type, const std::string& source)
+unsigned int OpenglWindow::compileGlShader(unsigned int type, const std::string& source)
 {
     // Get the shader source code
     unsigned int shaderID = glCreateShader(type);
@@ -54,13 +51,13 @@ unsigned int OpenglWindow::CompileGlShader(unsigned int type, const std::string&
 }
 
 // Creates the gl shader program, returns its ID
-unsigned int OpenglWindow::CreateGlShader(const std::string& vertexShader, const std::string& fragmentShader)
+unsigned int OpenglWindow::createGlShader(const std::string& vertexShader, const std::string& fragmentShader)
 {
     // Create shader program
     unsigned int programID = glCreateProgram();
     // Compile shader source files
-    unsigned int vertShader = CompileGlShader(GL_VERTEX_SHADER, vertexShader);
-    unsigned int fragShader = CompileGlShader(GL_FRAGMENT_SHADER, fragmentShader);
+    unsigned int vertShader = compileGlShader(GL_VERTEX_SHADER, vertexShader);
+    unsigned int fragShader = compileGlShader(GL_FRAGMENT_SHADER, fragmentShader);
     // Attach compiled shaders to shader program and link
     glAttachShader(programID, vertShader);
     glAttachShader(programID, fragShader);
@@ -73,130 +70,200 @@ unsigned int OpenglWindow::CreateGlShader(const std::string& vertexShader, const
     return programID;
 }
 
-// Constructor
-OpenglWindow::OpenglWindow(const char* windowName, int windowWidth, int windowHeight)
+unsigned int OpenglWindow::createTexture(const Image& image)
 {
-    // Create window
-    SetWindowName(windowName);
-    SetWindowSize(windowWidth, windowHeight);
-    if (!CreateWindow()) 
-        std::cout << "ERROR: OpenglWindow.CreateWindow something went wrong." << std::endl;
+    // Generate and bind texture
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    const int imageWidth  = image.m_width;
+    const int imageHeight = image.m_height;
+    const int coloursInImage = image.m_pixelClr.size();
+    const int floatsInImage  = coloursInImage * 3;
+
+    float* pixels = new float[floatsInImage];
+    std::vector<float> imagePixelfloats;
+
+    for (int i = coloursInImage-1; i > 0; i--)
+    {
+        imagePixelfloats.push_back(image.m_pixelClr[i].r());
+        imagePixelfloats.push_back(image.m_pixelClr[i].g());
+        imagePixelfloats.push_back(image.m_pixelClr[i].b());
+    }
+    std::copy(imagePixelfloats.begin(), imagePixelfloats.end(), pixels);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_FLOAT, pixels);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    delete[] pixels;
+    return textureID;
 }
+
+void OpenglWindow::createRectangle(unsigned int VAO, unsigned int VBO, unsigned int EBO)
+{
+    float vertices[] =
+    {
+        // positions          // colors           // uv
+         1.0f,  1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+         1.0f, -1.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+        -1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+        -1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+    };
+    unsigned int indices[] =
+    {
+        0, 1, 3,   // first triangle
+        1, 2, 3    // second triangle
+    };
+
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    // Position
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    // Colour
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+    // UV
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glBindVertexArray(VAO);
+}
+
+void OpenglWindow::drawImage(const Image& image)
+{
+    // Create a texture
+    unsigned int texture = createTexture(image);
+    glBindTexture(GL_TEXTURE_2D, texture);
+}
+
+// Constructor
+//OpenglWindow::OpenglWindow(const char* windowName, int windowWidth, int windowHeight)
+//{
+//    std::cout << std::endl << "Constructing Opengl window.." << std::endl;
+//    setWindowName(windowName);
+//    setWindowSize(windowWidth, windowHeight);
+//    if (!createWindow()) 
+//        std::cout << "ERROR: OpenglWindow.CreateWindow something went wrong." << std::endl;
+//}
 // Constructor
 OpenglWindow::OpenglWindow(const char* windowName, const Image& image)
 {
-    // Create window
-    SetWindowName(windowName);
-    SetWindowSize(image.m_width, image.m_height);
-    if (!CreateWindow())
+    std::cout << std::endl << "Constructing Opengl window.." << std::endl;
+    setWindowName(windowName);
+    setWindowSize(image.m_width, image.m_height);
+    if (!createWindow(image))
         std::cout << "ERROR: OpenglWindow.CreateWindow something went wrong." << std::endl;
 }
 // Constructor
-OpenglWindow::OpenglWindow(const char* windowName, const RTSettings& raytraceSettings)
-{
-    // Create window
-    SetWindowName(windowName);
-    SetWindowSize(raytraceSettings.m_imageWidth, raytraceSettings.m_imageHeight);
-    if (!CreateWindow())
-        std::cout << "ERROR: OpenglWindow.CreateWindow something went wrong." << std::endl;
-}
+//OpenglWindow::OpenglWindow(const char* windowName, const RTSettings& raytraceSettings)
+//{
+//    std::cout << std::endl << "Constructing Opengl window.." << std::endl;
+//    setWindowName(windowName);
+//    setWindowSize(raytraceSettings.m_imageWidth, raytraceSettings.m_imageHeight);
+//    if (!createWindow())
+//        std::cout << "ERROR: OpenglWindow.CreateWindow something went wrong." << std::endl;
+//}
 
-void OpenglWindow::SetWindowName(const char* windowName) 
+void OpenglWindow::setWindowName(const char* windowName) 
 {
     m_windowName = windowName;
 }
 
-void OpenglWindow::SetWindowSize(int width, int height) 
+void OpenglWindow::setWindowSize(int width, int height) 
 {
     m_windowHeight = height;
     m_windowWidth = width;
 }
 
 // Actual window making stuff
-bool OpenglWindow::CreateWindow()
+bool OpenglWindow::createWindow(const Image& image)
 {
-    GLFWwindow* window;
-
     if (!glfwInit())
         return false;
 
+    bool wireframe = false;
+
     // Create a windowed mode window and its OpenGL context
-    window = glfwCreateWindow(m_windowWidth, m_windowHeight, m_windowName, NULL, NULL);
-    if (!window)
+    m_window = glfwCreateWindow(m_windowWidth, m_windowHeight, m_windowName, NULL, NULL);
+    if (!m_window)
     {
         glfwTerminate();
         return false;
     }
 
     // Make the window's context current
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(m_window);
 
-    std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
+    //m_window = window;
+
+    std::cout << "GL_VERSION: " << glGetString(GL_VERSION) << std::endl;
 
     if (glewInit() != GLEW_OK)
         std::cout << "ERROR: GLEW is not OK" << std::endl;
     if (glewInit() == GLEW_OK)
         std::cout << "GLEW_OK" << std::endl;
 
-
-    //// Vertex positions
-    //float positions[6] = {
-    //    -0.5f, -0.5f,
-    //    -0.5f,  0.5f,
-    //     0.5f, -0.5f
-    //};
-    //
-    //// Create vertex buffers
-    //unsigned int buffer;
-    //glGenBuffers(1, &buffer);
-    //glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    //glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
-    //
-    //// Tell opgnl the vertex size
-    //glEnableVertexAttribArray(0);
-    //glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float)*2, 0);
-
-    //glViewport(0, 0 m_windowWidth, m_windowHeight);
-
-    // Create an empty vertex array buffer
-    EmptyVAO();
+    // Create buffers and rectangle
+    unsigned int VAO, VBO, EBO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glGenBuffers(1, &EBO);
+    createRectangle(VAO, VBO, EBO);
 
     // Attach shaders to the drawcall
-    std::string vertexShaderSrc = ParseShaderFile("src/Window/GLShaders/Vertexshader.shader");
-    std::string fragmentShaderSrc = ParseShaderFile("src/Window/GLShaders/TextureFill.shader");
-    unsigned int shaderProgram = CreateGlShader(vertexShaderSrc, fragmentShaderSrc);
+    std::string vertexShaderSrc = parseShaderFile("src/Window/GLShaders/Vertexshader.shader");
+    std::string fragmentShaderSrc = parseShaderFile("src/Window/GLShaders/TextureFill.shader");
+    unsigned int shaderProgram = createGlShader(vertexShaderSrc, fragmentShaderSrc);
     glUseProgram(shaderProgram);
 
-    // Generate and bind texture
-    unsigned int texture;
-    glGenTextures(1, &texture);
-    glActiveTexture(GL_TEXTURE0);
+    // Create a texture
+    //Image image = Image::generateTestImage(m_windowWidth, m_windowHeight);
+    unsigned int texture = createTexture(image);
     glBindTexture(GL_TEXTURE_2D, texture);
-    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 512, 512, 0, GL_RGBA8, GL_UNSIGNED_BYTE, pixelPtr);
+
+    if (wireframe)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     // Loop until the user closes the window
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(m_window))
     {
         // Render here
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Draw triangles
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // Swap front and back buffers
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(m_window);
 
         // Poll for and process events
         glfwPollEvents();
     }
 
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
     glDeleteProgram(shaderProgram);
 
     glfwTerminate();
     return false;
 }
 
-void OpenglWindow::ClearWindow(const Colour& fillColour)
+void OpenglWindow::clearWindow(const Colour& fillColour)
 {
     std::cout << "Clearing Window" << std::endl;
     glClearColor(fillColour.r(), fillColour.g(), fillColour.b(), 1.0);

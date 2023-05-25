@@ -189,8 +189,32 @@
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
     <None Include="README.md" />
+    <None Include="RenderOutputs\RenderOutput.ppm" />
+    <None Include="Scenes\defaultScene.bubbles" />
+    <None Include="Scenes\testScene.zip" />
     <None Include="src\Window\GLShaders\TextureFill.shader" />
     <None Include="src\Window\GLShaders\Vertexshader.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\wall.jpg" />
+    <Image Include="img\Banner%402x.png" />
+    <Image Include="img\Banner%404x.png" />
+    <Image Include="img\Logo\icon%400.5x.png" />
+    <Image Include="img\Logo\icon%402x.png" />
+    <Image Include="img\Logo\icon.png" />
+    <Image Include="img\Logo\icon_bk%400.5x.png" />
+    <Image Include="img\Logo\icon_bk%402x.png" />
+    <Image Include="img\Logo\icon_bk.png" />
+    <Image Include="img\Logo\logo%400.5x.png" />
+    <Image Include="img\Logo\logo%402x.png" />
+    <Image Include="img\Logo\logo.png" />
+    <Image Include="img\Logo\logo_bk%400.5x.png" />
+    <Image Include="img\Logo\logo_bk%402x.png" />
+    <Image Include="img\Logo\logo_bk.png" />
+    <Image Include="img\Webimg%400.5x.png" />
+    <Image Include="img\Webimg%402x.png" />
+    <Image Include="img\Webimg%404x.png" />
+    <Image Include="img\Webimg.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

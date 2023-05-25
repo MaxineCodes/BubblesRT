@@ -35,7 +35,8 @@ public:
 	void insertPixel(const Colour& pixelColour);
 	void insertPixelVector(const std::vector<Colour>& pixelCtrlVector);
 	Colour getPixelColour(int u, int v);
+	float* unpack();
 
 	static Image generateTestImage(int width, int height);
+	static float* unpackImage(const Image& image);
 };
-

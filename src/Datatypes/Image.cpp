@@ -71,3 +71,39 @@ Image Image::generateTestImage(int width, int height)
 	// Return image
 	return img;
 }
+
+float* Image::unpackImage(const Image& image)
+{
+	const int pixelClrSize = (sizeof(image.m_pixelClr) / sizeof(float)) * 3;
+	float pixels[pixelClrSize];
+
+	int offset = 0;
+	for (int i = 0; i < image.m_pixelClr.size(); i++)
+	{
+		pixels[i + offset] = image.m_pixelClr[i].r();
+		offset += 1;
+		pixels[i + offset] = image.m_pixelClr[i].g();
+		offset += 1;
+		pixels[i + offset] = image.m_pixelClr[i].b();
+		offset += 1;
+	}
+	return pixels;
+}
+
+float* Image::unpack()
+{
+	const int pixelClrSize = (sizeof(m_pixelClr) / sizeof(float)) * 3;
+	float pixels[pixelClrSize];
+
+	int offset = 0;
+	for (int i = 0; i < m_pixelClr.size(); i++)
+	{
+		pixels[i + offset] = m_pixelClr[i].r();
+		offset += 1;
+		pixels[i + offset] = m_pixelClr[i].g();
+		offset += 1;
+		pixels[i + offset] = m_pixelClr[i].b();
+		offset += 1;
+	}
+	return pixels;
+}
