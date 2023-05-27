@@ -12,12 +12,12 @@
 
 #include "../Materials/Material.h"
 #include "../RTCore/RTRay.h"
+#include "../Datatypes/Vector2.h"
 
 
 class Shape 
 {
 public:
-	
 	virtual bool intersect(const Ray& ray, float min, float max, rayHitRecord& record) const = 0;
 };
 

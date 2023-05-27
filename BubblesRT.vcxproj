@@ -151,6 +151,8 @@
     <ClCompile Include="src\RTCore\RTSettings.cpp" />
     <ClCompile Include="src\Serialisation\DataNodes.cpp" />
     <ClCompile Include="src\Serialisation\Deserialiser.cpp" />
+    <ClCompile Include="src\Shapes\Mesh.cpp" />
+    <ClCompile Include="src\Shapes\Polygon.cpp" />
     <ClCompile Include="src\Shapes\Sphere.cpp" />
     <ClCompile Include="src\Window\OpenglWindow.cpp" />
     <ClCompile Include="src\BubblesMain\Main.cpp" />
@@ -181,6 +183,7 @@
     <ClInclude Include="src\Shapes\Polygon.h" />
     <ClInclude Include="src\Shapes\Shape.h" />
     <ClInclude Include="src\Shapes\Sphere.h" />
+    <ClInclude Include="src\Shapes\Vertex.h" />
     <ClInclude Include="src\Window\OpenglWindow.h" />
     <ClInclude Include="src\Datatypes\Vector3.h" />
     <ClInclude Include="src\Datatypes\Vector2.h" />
