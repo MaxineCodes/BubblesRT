@@ -4,7 +4,9 @@
  
 ### The Bubbles raytracing rendering engine is a offline/CPU raytracing engine project.
 The goal of this project is to stay away from external libraries, and really understand how raytracing works under the hood.  
-This raytracer is not particularely efficient or feature-rich. It is a learning exersize after all. :)
+This ray-tracer is not particularly efficient or feature-rich. It is a learning exercise after all. :)
+
+[BubblesRT trello page.](https://trello.com/b/EzgDRD4m/bubblesrt)
 
 ---
 
