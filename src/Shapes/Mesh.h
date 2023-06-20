@@ -26,6 +26,6 @@ public:
 
     Mesh();
 
-    bool intersect(const RTRay& ray, float min, float max, rayHitRecord& record) const override;
+    virtual bool intersect(const RTRay& ray, float min, float max, rayHitRecord& record) const override;
 
 };

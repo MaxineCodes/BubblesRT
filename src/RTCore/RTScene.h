@@ -18,7 +18,9 @@
 #include <iostream>
 
 #include "../Cameras/PerspectiveCamera.h"
+#include "../Lights/Light.h"
 #include "../RTCore/RTObjectList.h"
+#include "../RTCore/RTSettings.h"
 
 
 class RTScene
@@ -32,8 +34,6 @@ private:
 	std::string m_defaultScenepath =
 		"D:\\Dev\\2023\\BubblesRT\\BubblesRT\\Scenes\\defaultScene.bubbles";
 
-	std::vector<std::string> m_sceneFileData[3];
-
 	// Camera
 	PerspectiveCamera m_camera;
 
@@ -43,42 +43,35 @@ private:
 	//std::vector<Material> m_materials;
 	//std::vector<Light> m_lights;
 
-public:
-	const Colour skyGradientTop = Colour::White();
-	const Colour skyGradientBottom = Colour::BubbleBlue();
+	unsigned int m_imageWidth, m_imageHeight;
 
 public:
+	Colour skyGradientTop = Colour::White();
+	Colour skyGradientBottom = Colour::BubbleBlue();
 
+public:
+	
+	
 	// Default constructor
-	RTScene(std::string& scenepath)
+	RTScene(RTSettings& settings)
 	{
-		if (scenepath != "")
-		{
-			m_scenePath = scenepath;
-			loadScene(scenepath);
-		}
-
-		else 
-		{
-			m_scenePath = m_defaultScenepath;
-			loadScene(m_scenePath);
-		}
+		m_imageWidth = settings.getWidth();
+		m_imageHeight = settings.getHeight();
 	}
 
-private:
-
-	// Load the scene and start all the necessary functions.
-	void loadScene(const std::string& scenepath);
-
-	void loadMaterials(std::vector<std::string>*& parsedFileData);
-	void loadShapes(std::vector<std::string>*& parsedFileData);
+public:
 
 	void addShape(std::shared_ptr<Shape>);
 
-	void createCameraFromFile(std::vector<std::string>* parsedFileData);
-	void populateSceneFromFile();
+	void createCamera(
+		Vector3 camPosition,
+		Vector3 camLookDirection,
+		Vector3 viewUp,
+		float fov,
+		float aperture);
 
-	const std::string getFileStringValue(std::vector<std::string>* parsedFileData, const char* type, const char* key);
+	void setSkyGradient(Colour top, Colour bottom);
+
 
 public:
 

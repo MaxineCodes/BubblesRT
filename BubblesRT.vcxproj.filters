@@ -90,6 +90,12 @@
     <ClCompile Include="src\Shapes\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lights\Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Import\USD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Window\OpenglWindow.h">
@@ -173,6 +179,12 @@
     <ClInclude Include="src\Shapes\Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lights\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Import\USD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />
@@ -183,6 +195,8 @@
     <None Include="Scenes\testScene.zip" />
     <None Include="Scenes\defaultScene.bubbles" />
     <None Include="RenderOutputs\RenderOutput.ppm" />
+    <None Include="Scenes\test_scene_bin.usd" />
+    <None Include="Scenes\test_scene_ascii.usd" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="img\Logo\icon.png">

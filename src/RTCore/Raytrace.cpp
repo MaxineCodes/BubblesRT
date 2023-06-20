@@ -26,7 +26,7 @@ Image raytrace(RTSettings& settings, RTScene& scene, const int sampleCount)
 	skyGradientTop = scene.skyGradientTop;
 	skyGradientBottom = scene.skyGradientBottom;
 
-	PerspectiveCamera camera = scene.getCamera ();
+	PerspectiveCamera camera = scene.getCamera();
 
 	Image RTOutput = Image(imageWidth, imageHeight);
 

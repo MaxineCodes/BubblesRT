@@ -6,7 +6,7 @@
 
 #include <vector>
 
-
+/*
 // Load the scene and create all the objects in the scene from the file
 // given with the scene path.
 void RTScene::loadScene(const std::string& scenepath)
@@ -50,7 +50,9 @@ void RTScene::loadScene(const std::string& scenepath)
 
 	std::cout << type << std::endl;
 }
+*/
 
+/*
 void RTScene::loadShapes(std::vector<std::string>*& parsedFileData)
 {
 	auto material = std::make_shared<Lambert>(Colour::BubbleBlue());
@@ -72,18 +74,47 @@ void RTScene::loadShapes(std::vector<std::string>*& parsedFileData)
 	
 	m_sceneObjectList.add(sphereGround);
 };
+*/
 
 void RTScene::addShape(std::shared_ptr<Shape> shape)
 {
 	m_sceneObjectList.add(shape);
 }
 
+void RTScene::createCamera(
+	Vector3 camPosition, 
+	Vector3 camLookDirection, 
+	Vector3 viewUp,
+	float fov,
+	float aperture)
+{
+	const float focusDistance = (camPosition - camLookDirection).length();
+	const float aspectRatio = m_imageWidth / m_imageHeight;
+
+	m_camera = PerspectiveCamera(
+		camPosition,
+		camLookDirection,
+		viewUp,
+		fov,
+		aspectRatio,
+		aperture,
+		focusDistance);
+}
+
+void RTScene::setSkyGradient(Colour top, Colour bottom)
+{
+	skyGradientTop = top;
+	skyGradientBottom = bottom;
+}
+
+/*
 void RTScene::loadMaterials(std::vector<std::string>*& parsedFileData)
 {
 
 }
+*/
 
-
+/*
 const std::string RTScene::getFileStringValue(std::vector<std::string>* parsedFileData, const char* type, const char* key)
 {
 	std::string dataType = type;
@@ -101,8 +132,9 @@ const std::string RTScene::getFileStringValue(std::vector<std::string>* parsedFi
 	}
 	return "none";
 }
+*/
 
-
+/*
 // Creates a camera from data inside of the scene file
 void RTScene::createCameraFromFile(std::vector<std::string>* parsedFileData)
 {
@@ -140,42 +172,44 @@ void RTScene::createCameraFromFile(std::vector<std::string>* parsedFileData)
 			focusDistance);
 	}
 }
+*/
 
-
+/*
 void RTScene::populateSceneFromFile()
 {
-	//// Create a place to store all the shape names.
-	//std::vector<std::string> shapesNamesInFile;
-	//
-	//// Get all the shape names and store them in the vector.
-	//for (int i = 0; i < m_sceneFileData[0].size(); i++)
-	//{
-	//	if (m_sceneFileData[0][i] == "shape" && m_sceneFileData[1][i] == "name")
-	//	{
-	//		shapesNamesInFile.push_back(m_sceneFileData[2][i]);
-	//	}
-	//}
-	//
-	//for (int i = 0; i < shapesNamesInFile.size(); i++)
-	//{
-	//	const char* shapeName = shapesNamesInFile[i].c_str();
-	//
-	//	// Get the shape type
-	//	const std::string shapeType = getFileStringValue(shapeName, "type");
-	//
-	//	if (shapeType == "sphere")
-	//	{
-	//		const float positionX = std::stof(getFileStringValue(shapeName, "positionx"));
-	//		const float positionY = std::stof(getFileStringValue(shapeName, "positiony"));
-	//		const float positionZ = std::stof(getFileStringValue(shapeName, "positionz"));
-	//		const Vector3 shapePosition(positionX, positionY, positionZ);
-	//
-	//		const float radius = std::stof(getFileStringValue(shapeName, "radius"));
-	//
-	//		const std::string materialName = getFileStringValue(shapeName, "material");
-	//	}
-	//}
+	// Create a place to store all the shape names.
+	std::vector<std::string> shapesNamesInFile;
+	
+	// Get all the shape names and store them in the vector.
+	for (int i = 0; i < m_sceneFileData[0].size(); i++)
+	{
+		if (m_sceneFileData[0][i] == "shape" && m_sceneFileData[1][i] == "name")
+		{
+			shapesNamesInFile.push_back(m_sceneFileData[2][i]);
+		}
+	}
+	
+	for (int i = 0; i < shapesNamesInFile.size(); i++)
+	{
+		const char* shapeName = shapesNamesInFile[i].c_str();
+	
+		// Get the shape type
+		const std::string shapeType = getFileStringValue(shapeName, "type");
+	
+		if (shapeType == "sphere")
+		{
+			const float positionX = std::stof(getFileStringValue(shapeName, "positionx"));
+			const float positionY = std::stof(getFileStringValue(shapeName, "positiony"));
+			const float positionZ = std::stof(getFileStringValue(shapeName, "positionz"));
+			const Vector3 shapePosition(positionX, positionY, positionZ);
+	
+			const float radius = std::stof(getFileStringValue(shapeName, "radius"));
+	
+			const std::string materialName = getFileStringValue(shapeName, "material");
+		}
+	}
 }
+*/
 
 
 PerspectiveCamera RTScene::getCamera()

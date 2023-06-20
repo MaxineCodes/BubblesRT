@@ -38,11 +38,12 @@
 #include "../Window/OpenglWindow.h"
 #include "../RTCore/Raytrace.h"
 #include "../Export/Export.h"
+#include "../Import/USD.h"
 
 // Entrypoint (Duh)
 int main(void)
 {
-    const int ImageWidth  = 640;
+    const int ImageWidth  = 1280;
     const int ImageHeight = 640;
     const int sampleCount = 1;
 
@@ -50,8 +51,9 @@ int main(void)
     RTSettings raytraceSettings(ImageWidth, ImageHeight);
 
     // Get Scene
-    std::string raytraceScenepath = "";
-    RTScene raytraceScene(raytraceScenepath);
+    RTScene raytraceScene = USD::constructDefaultScene("blabla", raytraceSettings);
+    //std::string raytraceScenepath = "";
+    //RTScene raytraceScene(raytraceSettings);
 
     raytraceSettings.printInfo(sampleCount);
     raytraceScene.printInfo();
