@@ -16,6 +16,8 @@
 
 #include "../DataTypes/Vector3.h"
 #include "../Shapes/Shape.h"
+#include "../Shapes/Sphere.h"
+#include "../Shapes/Mesh.h"
 
 
 class RTObjectList

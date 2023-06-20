@@ -22,6 +22,6 @@ public:
 };
 
 
-#include "Sphere.h"
-#include "Polygon.h"
-#include "Mesh.h"
+//#include "Sphere.h"
+//#include "Polygon.h"
+//#include "Mesh.h"

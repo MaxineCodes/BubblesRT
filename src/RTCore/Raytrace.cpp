@@ -135,7 +135,7 @@ Colour raytraceRay(
 }
 
 
-// Trace the ray and return the object normal vector as rgb
+// Trace the ray as normally but return the object normal vector as rgb
 Colour raytraceRayNormalColour(
 	const RTRay ray,
 	const RTObjectList& objectList

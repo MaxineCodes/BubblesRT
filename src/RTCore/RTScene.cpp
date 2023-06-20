@@ -53,18 +53,24 @@ void RTScene::loadScene(const std::string& scenepath)
 
 void RTScene::loadShapes(std::vector<std::string>*& parsedFileData)
 {
-	Vector3 center = Vector3(0, 0, -5);
-	float radius = 0.5;
-	auto material = std::make_shared<Lambert>(Colour(0.5, 0.5, 0.5));
-	auto sphere1 = std::make_shared <Sphere>(center, radius, material);
+	auto material = std::make_shared<Lambert>(Colour::BubbleBlue());
+	auto sphere1 = std::make_shared <Sphere>(Vector3(0, 0, 0), 0.50, material);
+
+	auto material2 = std::make_shared<Lambert>(Colour::BubblePurple());
+	auto sphere2 = std::make_shared <Sphere>(Vector3(-1.75, 0.25, 0), 0.75, material2);
+
+	auto material3 = std::make_shared<Lambert>(Colour::Black());
+	auto sphere3 = std::make_shared <Sphere>(Vector3(1.75, -0.25, 0), 0.35, material3);
 
 	m_sceneObjectList.add(sphere1);
-
-
-	auto groundmaterial = std::make_shared<Lambert>(Colour(0.4, 0.8, 0.2));
-	auto sphere2 = std::make_shared <Sphere>(Vector3(0, -100.5, 0), 100, groundmaterial);
-	
 	m_sceneObjectList.add(sphere2);
+	m_sceneObjectList.add(sphere3);
+
+
+	auto groundmaterial = std::make_shared<Lambert>(Colour::BubbleHotpink());
+	auto sphereGround = std::make_shared <Sphere>(Vector3(0, -100.5, 0), 100, groundmaterial);
+	
+	m_sceneObjectList.add(sphereGround);
 };
 
 void RTScene::addShape(std::shared_ptr<Shape> shape)
