@@ -19,9 +19,6 @@ public:
     Vertex vertexA, vertexB, vertexC;
 
 public:
-
     Polygon(Vertex vertexA, Vertex vertexB, Vertex vertexC);
-
-    bool intersect(const RTRay& ray, float min, float max, rayHitRecord& record) const override;
-
+    bool intersect(const RTRay& ray, float min, float max, rayHitRecord& record);
 };
