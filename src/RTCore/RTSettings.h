@@ -25,11 +25,11 @@ public:
 	// Render
 	int m_sampleCount = 1;
 	int m_rayBounceCount = 10;
-	bool m_antialiasing = false;
+	bool m_antialiasing = false; // not yet implemented
 
 	// Debug Render
 	bool m_normalDebug = false;
-	bool m_depthDebug = false;
+	bool m_depthDebug = false; // not yet implemented
 
 
 public:
