@@ -1,8 +1,8 @@
 #include "Mesh.h"
 
-Mesh::Mesh()
+Mesh::Mesh(const char* name)
 {
-
+	m_name = name;
 }
 
 bool Mesh::intersect(const RTRay& ray, float min, float max, rayHitRecord& record) const

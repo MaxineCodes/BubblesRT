@@ -1,8 +1,9 @@
 #include "Lambert.h"
 
-Lambert::Lambert(const Colour& albedo)
+Lambert::Lambert(const Colour& albedo, const char* name)
 {
 	m_albedo = albedo;
+    m_name = name;
 }
 
 bool Lambert::scatter(const RTRay& ray, const rayHitRecord& record, colour& attenuation, Ray& scatteredRay) const

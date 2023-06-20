@@ -19,12 +19,13 @@
 class Mesh : public Shape
 {
 public:
+    const char* m_name;
     std::shared_ptr<Material> m_material;
     std::vector<std::shared_ptr<Polygon>> m_polygons;
 
 public:
 
-    Mesh();
+    Mesh(const char* name = "default_name");
 
     virtual bool intersect(const RTRay& ray, float min, float max, rayHitRecord& record) const override;
 

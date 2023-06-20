@@ -1,10 +1,11 @@
 #include "Sphere.h"
 
-Sphere::Sphere(Vector3 position, float radius, std::shared_ptr<Material> material)
+Sphere::Sphere(Vector3 position, float radius, std::shared_ptr<Material> material, const char* name)
 {
     m_position = position;
     m_radius = radius;
     m_material = material;
+    m_name = name;
 }
 
 bool Sphere::intersect(const RTRay& ray, float min, float max, rayHitRecord& record) const

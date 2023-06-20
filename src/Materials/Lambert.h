@@ -7,11 +7,12 @@ class Lambert : public Material
 {
 public:
 
+	const char* m_name;
 	Colour m_albedo;
 
 public:
 
-	Lambert(const Colour& albedo);
+	Lambert(const Colour& albedo, const char* name = "default_name");
 
 public:
 

@@ -51,12 +51,15 @@ int main(void)
     RTSettings raytraceSettings(ImageWidth, ImageHeight);
 
     // Get Scene
-    RTScene raytraceScene = USD::constructDefaultScene("blabla", raytraceSettings);
-    //std::string raytraceScenepath = "";
-    //RTScene raytraceScene(raytraceSettings);
+    const char* sceneFilepath = "D:\\Dev\\2023\\BubblesRT\\BubblesRT\\Scenes\\test_scene_ascii.usd";
+    RTScene raytraceScene = USD::constructDefaultScene(sceneFilepath, raytraceSettings);
 
     raytraceSettings.printInfo(sampleCount);
     raytraceScene.printInfo();
+
+    USD::extractMeshNames(sceneFilepath);
+    USD::getMaterialsFromFile(sceneFilepath);
+    USD::getMeshesFromFile(sceneFilepath);
 
     // Generate a raytraced image
     Image RTOutput = raytrace(
