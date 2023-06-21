@@ -19,6 +19,7 @@ class Shape
 {
 public:
 	const char* m_name;
+	const char* m_materialName;
 	virtual bool intersect(const Ray& ray, float min, float max, rayHitRecord& record) const = 0;
 };
 

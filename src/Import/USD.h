@@ -38,7 +38,16 @@ namespace USD
 	// Returns an array of all the type names in the .USD file
 	extern const std::vector<std::string> extractMeshNames(const char* filepath);
 	extern const std::vector<std::string> extractMaterialNames(const char* filepath);
-}
 
-extern const std::string parseFileToString(const char* filepath);
-extern const std::string getDefinedTypeName(const char* type, const std::string& line);
+	extern const Vector2 convertUSDfloat2ToVector2(const std::string& value);
+	extern const Vector3 convertUSDfloat3ToVector3(const std::string& value);
+	extern const Vector3 convertUSDnormal3fToVector3(const std::string& value);
+	extern const Colour convertUSDcolorf3ToColour(const std::string& value);
+
+	extern const std::string extractExpressionValue(const std::string& content, const std::string& key);
+
+	extern const std::string parseFileToString(const char* filepath);
+	extern const std::string getDefinedTypeName(const char* type, const std::string& line);
+
+	extern const std::string trim(const std::string& string);
+}

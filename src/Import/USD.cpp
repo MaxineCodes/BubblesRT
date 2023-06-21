@@ -62,7 +62,7 @@ const std::vector<Mesh> USD::getMeshesFromFile(const char* filepath)
 		std::string meshContent = extractMeshContent(filepath, meshNames[i]);
 		//shaderContents.push_back(shaderContent);
 
-		std::cout << meshContent << std::endl;
+		//std::cout << meshContent << std::endl;
 
 		//if (shaderContent.find("\"lambert\""))
 		//{
@@ -137,6 +137,8 @@ const std::string USD::extractMeshContent(const char* filepath, const std::strin
 
 const Mesh USD::createMeshFromMeshContent(const std::string& meshContent)
 {
+
+
 	return Mesh();
 }
 
@@ -170,9 +172,10 @@ const std::shared_ptr<Material> USD::createLambertFromShaderContent(const std::s
 {
 	Colour albedo = Colour::BubblePurple();
 
-	
+	std::string diffuseColour = extractExpressionValue(shaderContent, "color3f inputs:diffuseColor");
+	albedo = convertUSDcolorf3ToColour(diffuseColour);
 
-	return std::make_shared<Lambert>(albedo, "bla");
+	return std::make_shared<Lambert>(albedo, name.c_str());
 }
 
 const Camera USD::getCameraFromFile(const char* filepath)
@@ -180,7 +183,7 @@ const Camera USD::getCameraFromFile(const char* filepath)
     return Camera();
 }
 
-const std::string getDefinedTypeName(const char* type, const std::string& line)
+const std::string USD::getDefinedTypeName(const char* type, const std::string& line)
 {
 	std::string stringType = type;
 	std::string key = "def " + stringType + " \"";
@@ -200,7 +203,18 @@ const std::string getDefinedTypeName(const char* type, const std::string& line)
 	return "";
 }
 
-const std::string parseFileToString(const char* filepath)
+const std::string USD::trim(const std::string& string)
+{
+	const char* ws = " \t\n\r\f\v";
+	std::string str = string;
+
+	str = str.erase(str.find_last_not_of(ws) + 1);
+	str.erase(0, str.find_first_not_of(ws));
+
+	return str;
+}
+
+const std::string USD::parseFileToString(const char* filepath)
 {
 	std::ifstream file(filepath);
 	if (!file) {
@@ -255,4 +269,88 @@ const std::vector<std::string> USD::extractMaterialNames(const char* filepath)
 	}
 
 	return materialNames;
+}
+
+std::string trimWhitespace(const std::string& input) 
+{
+	size_t start = input.find_first_not_of(" \t");
+	size_t end = input.find_last_not_of(" \t");
+
+	if (start == std::string::npos || end == std::string::npos) 
+	{
+		// Input contains only whitespace characters
+		return "";
+	}
+
+	return input.substr(start, end - start + 1);
+}
+
+const Vector2 USD::convertUSDfloat2ToVector2(const std::string& value)
+{
+	return Vector2();
+}
+
+const Vector3 USD::convertUSDfloat3ToVector3(const std::string& value)
+{
+	return Vector3();
+}
+
+const Vector3 USD::convertUSDnormal3fToVector3(const std::string& value)
+{
+	return Vector3();
+}
+
+const Colour USD::convertUSDcolorf3ToColour(const std::string& value)
+{
+	// Remove the parentheses from the input string
+	std::string inputValue = value.substr(1, value.length() - 2);
+	std::istringstream valueSS(inputValue);
+
+	// Split the string into 3 values
+	std::string item;
+	float floatValues[3]{ 0.0f, 0.0f, 0.0f };
+	unsigned int i = 0;
+	while (std::getline(valueSS, item, ',')) 
+	{
+		// Convert each token to float and add to the vector
+		float value = std::stof(item);
+		floatValues[i] = value;
+		i++;
+	}
+
+	// Return a new colour value
+	return Colour(floatValues[0], floatValues[1], floatValues[2]);
+}
+
+const std::string USD::extractExpressionValue(const std::string& content, const std::string& key)
+{
+	std::istringstream contentSS(content);
+	std::string line;
+	std::string expressionKey = key;
+
+	while (std::getline(contentSS, line))
+	{
+		// Find the equals sign position
+		size_t equalsPosition = line.find('=');
+		if (equalsPosition != std::string::npos)
+		{
+			// expression is the string before the equals sign
+			// expressionValue is the string after the equals sign
+			std::string exression = line.substr(0, equalsPosition);
+			std::string exressionValue = line.substr(equalsPosition + 1);
+
+			// Remove leading and trailing whitespaces
+			line = trim(line);
+			expressionKey = trim(expressionKey);
+			exression = trim(exression);
+			exressionValue = trim(exressionValue);
+
+			if (exression == expressionKey)
+			{
+				return exressionValue;
+			}
+		}
+	}
+
+	return "";
 }
