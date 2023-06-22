@@ -44,9 +44,17 @@ const RTScene USD::constructDefaultScene(const char* filepath, RTSettings& setti
 }
 
 
+// Turn the .USD ASCII file into a RTScene object so it may be sent to the raytracer
 const RTScene USD::constructSceneFromFile(const char* filepath, RTSettings& settings)
 {
     RTScene scene = RTScene(settings);
+
+	// Load and store all the materials from the USD file
+	std::vector<std::shared_ptr<Material>> materials = getMaterialsFromFile(filepath);
+
+	// Load and store all the meshes from the USD file
+	// Meshes require materials to be loaded first
+	std::vector<Mesh> meshes = getMeshesFromFile(filepath);
 
     return scene;
 }

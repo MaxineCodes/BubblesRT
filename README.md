@@ -10,7 +10,42 @@ This ray-tracer is not particularly efficient or feature-rich. It is a learning 
 
 ---
 
-Dependencies:
+## Feature overview:
+
+### Basics
+- [x] Basic raytracing algorithm
+- [x] OpenGL viewport to display the rendered image
+- [ ] Using .USD ASCII files as input
+- [ ] Multithreading
+- [ ] Command line interface
+- [ ] HDR environment maps
+- [ ] Texture mapping
+
+### Outputs
+- [x] Exporting rendered image as .ppm file
+- [ ] Exporting rendered image as .png file
+
+### Supported Lights
+- [x] Environment lights
+- [ ] Point lights
+- [ ] Directional lights
+- [ ] Area lights
+- [ ] Emissive materials
+
+### Supported Geometry
+- [x] Spheres
+- [ ] Meshes
+
+### Supported Materials
+- [x] Lambert materials
+- [ ] Phong materials
+- [ ] Glass materials
+- [ ] Metallic materials
+- [ ] PBR materials
+
+---
+
+### Dependencies:
 - OpenGL
 - GLEW
 - GLFW
