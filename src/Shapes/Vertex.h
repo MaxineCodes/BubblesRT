@@ -3,7 +3,7 @@
 //	Vertex.h
 //
 //	Description:
-//	 Vertex storing a position, texture coordinate, and a colour.
+//	 Vertex storing a position, normal, texture coordinate, and a colour.
 // 
 //  
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,14 +17,15 @@
 struct Vertex
 {
 	Vector3 position;
+	Vector3 normal;
 	Vector2 textureCoordinate;
 	Colour colour;
 
 	Vertex() {}
 	~Vertex() {}
 
-	Vertex(Vector3 pos, Vector2 texCoord, Colour colour)
-		: position(pos), textureCoordinate(texCoord), colour(colour)
+	Vertex(Vector3 pos, Vector3 normal, Vector2 texCoord, Colour colour) 
+		: position(pos), normal(normal), textureCoordinate(texCoord), colour(colour)
 	{
 
 	}

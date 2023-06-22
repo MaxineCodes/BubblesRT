@@ -45,7 +45,7 @@ int main(void)
 {
     const int ImageWidth  = 1280;
     const int ImageHeight = 640;
-    const int sampleCount = 1;
+    const int sampleCount = 100;
 
     // Get Raytrace Settings
     RTSettings raytraceSettings(ImageWidth, ImageHeight);

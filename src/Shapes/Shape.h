@@ -6,6 +6,8 @@
 //	 Basic general shape interface.
 //	 Defines what a shape must do. In this case, figure out of a ray intersects it or not.
 // 
+//   Every shape has a material associated with it.
+// 
 //  
 /////////////////////////////////////////////////////////////////////////////////////////////
 #pragma once

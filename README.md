@@ -10,16 +10,25 @@ This ray-tracer is not particularly efficient or feature-rich. It is a learning 
 
 ---
 
+## Rendering results:
+
+Render output at 22-06-2023 using only spheres and lambert materials:
+
+![image](https://github.com/MaxineCodes/BubblesRT/blob/main/RenderOutputs/RenderOutput_22-06-2023.png)
+
+---
+
 ## Feature overview:
 
 ### Basics
 - [x] Basic raytracing algorithm
 - [x] OpenGL viewport to display the rendered image
+- [ ] Binary space partitioning
+- [ ] HDR environment maps
+- [ ] Texture mapping
 - [ ] Using .USD ASCII files as input
 - [ ] Multithreading
 - [ ] Command line interface
-- [ ] HDR environment maps
-- [ ] Texture mapping
 
 ### Outputs
 - [x] Exporting rendered image as .ppm file
@@ -35,6 +44,8 @@ This ray-tracer is not particularly efficient or feature-rich. It is a learning 
 ### Supported Geometry
 - [x] Spheres
 - [ ] Meshes
+- [ ] Vertex normals
+- [ ] Normal smoothing
 
 ### Supported Materials
 - [x] Lambert materials
