@@ -197,6 +197,7 @@
     <None Include="RenderOutputs\RenderOutput.ppm" />
     <None Include="Scenes\test_scene_bin.usd" />
     <None Include="Scenes\test_scene_ascii.usd" />
+    <None Include="Scenes\test_scene.mb" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="img\Logo\icon.png">
@@ -251,6 +252,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="img\Webimg%404x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RenderOutputs\RenderOutput_22-06-2023.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

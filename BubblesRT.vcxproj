@@ -199,6 +199,7 @@
     <None Include="RenderOutputs\RenderOutput.ppm" />
     <None Include="Scenes\defaultScene.bubbles" />
     <None Include="Scenes\testScene.zip" />
+    <None Include="Scenes\test_scene.mb" />
     <None Include="Scenes\test_scene_ascii.usd" />
     <None Include="Scenes\test_scene_bin.usd" />
     <None Include="src\Window\GLShaders\TextureFill.shader" />
@@ -223,6 +224,7 @@
     <Image Include="img\Webimg%402x.png" />
     <Image Include="img\Webimg%404x.png" />
     <Image Include="img\Webimg.png" />
+    <Image Include="RenderOutputs\RenderOutput_22-06-2023.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
