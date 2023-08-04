@@ -1,0 +1,29 @@
+SETTINGS
+imgwidth 640
+imgheight 480
+
+SCENE
+name DefaultScene
+
+CAMERA
+type perspectivecamera
+positionx 10
+positiony 5
+positionz 2.5
+lookDirectionx 2.5
+lookDirectiony 5
+lookDirectionz 10
+fov 60
+aperture 10
+focusDistance 10
+
+SHAPE
+name shape0
+type sphere
+positionx 1
+positiony 0.5
+positionz 0.25
+radius 3
+material mat1
+
+END_OF_FILE
