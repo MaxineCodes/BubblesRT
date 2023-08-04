@@ -14,7 +14,7 @@ This ray-tracer is not particularly efficient or feature-rich. It is a learning 
 
 Render output at 22-06-2023 using only spheres and lambert materials:
 
-![image](https://github.com/MaxineCodes/BubblesRT/blob/main/RenderOutputs/renderOutput_22-06-2023.png)
+![image](https://github.com/MaxineCodes/BubblesRT/blob/main/RenderOutputs/RenderOutput_22-06-2023.png)
 
 ---
 
