@@ -1,8 +1,8 @@
 # Bubbles Raytracing Renderer
  
-## BubblesRT is a semi-realtime GPU-accelerated raytracing engine project.
+### BubblesRT is a semi-realtime GPU-accelerated raytracing engine project.
 
-BubblesRT.. whether RT stands for RealTime or RayTraced is up to you.
+BubblesRT.. whether RT stands for RealTime or RayTraced is up to you. </br>
 It's gonna be fun and mathy!
 
 ---
@@ -10,8 +10,6 @@ It's gonna be fun and mathy!
 ### Navigation:
 
 `BubblesCore/Source` contains all the fun raytracing code.
-
----
 
 ### Building:
 
@@ -44,12 +42,12 @@ Also a TODO list for myself.
 
 ---
 
-### Dependencies:
+## Dependencies:
 - TBD
 
 ---
 
-### License
+## License
 
 UNLICENSE 
 
