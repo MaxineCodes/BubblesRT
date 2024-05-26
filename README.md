@@ -1,18 +1,19 @@
 # Bubbles Raytracing Renderer
  
-### The Bubbles raytracing rendering engine is a offline/CPU raytracing engine project.
+## BubblesRT is a semi-realtime GPU-accelerated raytracing engine project.
 
+BubblesRT.. whether RT stands for RealTime or RayTraced is up to you.
 It's gonna be fun and mathy!
 
 ---
 
-## Navigation:
+### Navigation:
 
 `BubblesCore/Source` contains all the fun raytracing code.
 
 ---
 
-## Building:
+### Building:
 
 Premake5 is used for the build system.
 
